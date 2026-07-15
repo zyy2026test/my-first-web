@@ -2,6 +2,9 @@
 # 固税计算器 - 自动发布脚本
 # 作用：提交本地改动并推送到 GitHub，触发 GitHub Pages 发布
 # 用法：powershell -ExecutionPolicy Bypass -File deploy.ps1 "提交说明(可选)"
+#
+# 注意：本机 git 系统配置有 helper-selector（GUI 弹窗），
+#       必须用 -c credential.helper= 强制禁用，否则推送会卡住。
 # ===============================================
 param(
     [string]$Message = ""
@@ -31,7 +34,8 @@ Write-Host "[3/4] 提交: $Message"
 git commit -m "$Message"
 
 Write-Host "[4/4] 推送到 GitHub (origin main)..."
-git push origin main
+# 必须加 -c credential.helper= 覆盖系统级 GUI 弹窗，否则会卡住
+git -c credential.helper= push origin main
 
 Write-Host ""
 Write-Host "[OK] 发布完成！"
