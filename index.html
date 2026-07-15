@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -422,7 +422,12 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
           if(!isNaN(q)&&!isNaN(kg)&&!isNaN(L)&&!isNaN(W)&&!isNaN(H)&&q>0&&kg>0&&L>0&&W>0&&H>0)rows.push({q:q,kg:kg,L:L,W:W,H:H,sum3:L+W+H});
         }
       }
-      if(!rows.length){alert("数据格式错误");return}
+      if(!rows.length){alert("多件数据格式错误，请检查：\n每行5个数字，用空格分隔\n格式：件数 单件重KG 长cm 宽cm 高cm\n示例：150 11 58 39 27");return}
+    }
+    if(!rows.length){
+      if(md==="single"){alert("请填写长宽高");return}
+      if(md==="total"){alert("请填写总重量和总方数");return}
+      alert("数据格式错误");return
     }
     var tCBM=0,tQty=0,tKg=0;
     if(md==="total"&&rows.length){
