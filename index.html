@@ -453,7 +453,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
       alert("总方数模式仅支持1~3区，4区以上请使用多件模式输入详细尺寸");
       return;
     }
-    var d20,d40,needTruck=false;  // needTruck提升到外层作用域
+    var d20,d40,needTruck=false,trkSize="";  // 变量提升到外层作用域
     if(tp==="truck"){
       if(!TP[w]){alert("无此仓库代码包车价格");return}
       var sz=document.getElementById("trk").value;
@@ -475,7 +475,6 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
       // 如果有货物超尺寸，自动转包车
       if(needTruck && z===7){
         // 根据总体积和总重量自动选择车型
-        var trkSize;
         if(tCBM<=8 && tKg<=1500) trkSize="2T";
         else if(tCBM<=18 && tKg<=2500) trkSize="4T";
         else trkSize="10T";
@@ -494,6 +493,8 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
           // 更新车型选择框
           var trkSel=document.getElementById("trk");
           trkSel.value=trkSize;
+          // 更新按钮状态：高亮“包车”按钮
+          st("truck");
           alert("三边和超过260cm，已自动切换为"+trkSize+"包车\n包车费用："+fp+" JPY");
         }else{
           alert("货物三边和超过260cm，请手动选择包车模式");
@@ -517,7 +518,21 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     document.getElementById("s4").textContent=Math.round(tKg);
     var bd=document.getElementById("bd");bd.innerHTML="";
     if(md!=="total"){
-      for(var i=0;i<rows.length;i++){var ri=rows[i];var cbm=ri.L*ri.W*ri.H/1e6*ri.q;var trvR=trv(ri.sum3,ri.kg,tp,z,w,ri.L,ri.W,ri.H);var tr=document.createElement("tr");tr.innerHTML="<td>"+(i+1)+"</td><td class=n>"+ri.q+"</td><td class=n>"+ri.kg.toFixed(1)+"</td><td class=n>"+ri.L+"</td><td class=n>"+ri.W+"</td><td class=n>"+ri.H+"</td><td class=n>"+(ri.kg*ri.q).toFixed(1)+"</td><td class=n>"+ri.sum3+"</td><td class=n>"+cbm.toFixed(4)+"</td><td>"+trvR.tier+"</td><td class=n>"+trvR.price+"</td>";bd.appendChild(tr);}
+      for(var i=0;i<rows.length;i++){
+        var ri=rows[i];
+        var cbm=ri.L*ri.W*ri.H/1e6*ri.q;
+        var trvR=trv(ri.sum3,ri.kg,tp,z,w,ri.L,ri.W,ri.H);
+        var tierDisplay=trvR.tier;
+        var priceDisplay=trvR.price;
+        // 如果自动转包车，显示车型和包车总价
+        if(needTruck && z===7 && trkSize){
+          tierDisplay=trkSize+"包车";
+          priceDisplay="-";  // 包车按整车计价，单件不显示
+        }
+        var tr=document.createElement("tr");
+        tr.innerHTML="<td>"+(i+1)+"</td><td class=n>"+ri.q+"</td><td class=n>"+ri.kg.toFixed(1)+"</td><td class=n>"+ri.L+"</td><td class=n>"+ri.W+"</td><td class=n>"+ri.H+"</td><td class=n>"+(ri.kg*ri.q).toFixed(1)+"</td><td class=n>"+ri.sum3+"</td><td class=n>"+cbm.toFixed(4)+"</td><td>"+tierDisplay+"</td><td class=n>"+priceDisplay+"</td>";
+        bd.appendChild(tr);
+      }
       document.getElementById("det").className="det sh";
     }else{
       document.getElementById("det").className="det";
