@@ -175,7 +175,7 @@ tr:hover td{background:#f8f9ff}
     </div>
   </div>
   <div id="mA">
-    <textarea id="txt" placeholder="每行: 件数 重(单件重KG) 长(cm) 宽(cm) 高(cm)空格或通号分隔示例 150 11 58 39 27"></textarea>
+    <textarea id="txt" placeholder="每行格式：件数 单件重KG 长 宽 高（件数为1时可省略）&#10;示例：&#10;150 11 58 39 27&#10;11 58 39 27（件数=1时可省略件数）"></textarea>
   </div>
   <div id="tA" style="display:none">
     <div class="sg">
@@ -421,12 +421,18 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
       var ls=txt.split("\n");
       for(var i=0;i<ls.length;i++){
         var ps=ls[i].split(/[\s,]+/);
-        if(ps.length>=5){
-          var q=parseFloat(ps[0]),kg=parseFloat(ps[1]),L=parseFloat(ps[2]),W=parseFloat(ps[3]),H=parseFloat(ps[4]);
+        // 支持两种格式：5字段(件数 重 长 宽 高) 或 4字段(重 长 宽 高,默认件数=1)
+        if(ps.length>=4){
+          var q,kg,L,W,H;
+          if(ps.length>=5){
+            q=parseFloat(ps[0]);kg=parseFloat(ps[1]);L=parseFloat(ps[2]);W=parseFloat(ps[3]);H=parseFloat(ps[4]);
+          }else{
+            q=1;kg=parseFloat(ps[0]);L=parseFloat(ps[1]);W=parseFloat(ps[2]);H=parseFloat(ps[3]);
+          }
           if(!isNaN(q)&&!isNaN(kg)&&!isNaN(L)&&!isNaN(W)&&!isNaN(H)&&q>0&&kg>0&&L>0&&W>0&&H>0)rows.push({q:q,kg:kg,L:L,W:W,H:H,sum3:L+W+H});
         }
       }
-      if(!rows.length){alert("多件数据格式错误，请检查：\n每行5个数字，用空格分隔\n格式：件数 单件重KG 长cm 宽cm 高cm\n示例：150 11 58 39 27");return}
+      if(!rows.length){alert("多件数据格式错误，请检查：\n格式1：件数 单件重KG 长cm 宽cm 高cm\n格式2：单件重KG 长cm 宽cm 高cm（件数默认1）\n示例：\n150 11 58 39 27\n11 58 39 27（件数=1）");return}
     }
     if(!rows.length){
       if(md==="single"){alert("请填写长宽高");return}
