@@ -279,7 +279,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
   function fm(n){return Math.round(n).toLocaleString()+" JPY"};
   var pcOvr={1:320,2:320,3:320,4:340,5:340,6:340};
 
-  function trv(s,kg,t,z,w){
+  function trv(s,kg,t,z,w,L,W,H){
     var wkg=t==="pc"?20:10,skg=t==="pc"?30:20;
     // 拼车基础价 (3 tiers × 6 zones) + oversize 320/340 per 20cm
     var pcBase={
@@ -308,19 +308,23 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
       if(kg>50){var overW=Math.ceil((kg-50)/10);extra+=overW*(pcOvr[z]||0);}
       // 第7区非FBA仓：独立3档逻辑
       if(z===7){
+        // 非FBA仓库：按三边之和判断档位，超过260转包车
+        var tier_s = s<=140?"140":s<=160?"160":s<=260?"260":"truck";
+        
         if(w==="乐天流山"){
+          if(tier_s==="truck") return{tier:"超尺寸转包车",price:0,needTruck:true};
           return{tier:"统一",price:580};
         }
         if(w==="JCL六方町"){
-          tier=s<=160?"160":s<=260?"260":"300";
-          var pc7_l={160:560,260:760,300:1000};
-          return{tier:tier+"档",price:pc7_l[tier]||1000};
+          if(tier_s==="truck") return{tier:"超尺寸转包车",price:0,needTruck:true};
+          var pc7_l={140:560,160:560,260:760};
+          return{tier:tier_s+"档",price:pc7_l[tier_s]||560};
         }
         // JCL天户町 / JCL箕面 / 谷仓上尾
-        tier=s<=140?"140":s<=160?"160":"180";
-        var pc7={JCL天户町:{140:560,160:710,180:810},JCL箕面:{140:650,160:900,180:1000},谷仓上尾:{140:580,160:780,180:880}};
-        var p7=(pc7[w]||{})[tier]||0;
-        return{tier:tier+"档",price:p7};
+        if(tier_s==="truck") return{tier:"超尺寸转包车",price:0,needTruck:true};
+        var pc7={JCL天户町:{140:560,160:710,260:810},JCL箕面:{140:650,160:900,260:1000},谷仓上尾:{140:580,160:780,260:880}};
+        var p7=(pc7[w]||{})[tier_s]||0;
+        return{tier:tier_s+"档",price:p7};
       }
       return{tier:tier,price:baseP+extra};
     }
@@ -455,8 +459,40 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
       d20=Math.round(3500*1.1*tCBM);d40=d20;
     }else{
       // pc 或 green：所有区都用价格表（含超尺寸附加）
-      var dJ=0;
-      for(var i=0;i<rows.length;i++){var ri=rows[i];var trvR=trv(ri.sum3,ri.kg,tp,z,w);dJ+=ri.q*trvR.price;}
+      var dJ=0,needTruck=false;
+      for(var i=0;i<rows.length;i++){
+        var ri=rows[i];
+        var trvR=trv(ri.sum3,ri.kg,tp,z,w,ri.L,ri.W,ri.H);
+        if(trvR.needTruck){needTruck=true;}
+        dJ+=ri.q*trvR.price;
+      }
+      // 如果有货物超尺寸，自动转包车
+      if(needTruck && z===7){
+        // 根据总体积和总重量自动选择车型
+        var trkSize;
+        if(tCBM<=8 && tKg<=1500) trkSize="2T";
+        else if(tCBM<=18 && tKg<=2500) trkSize="4T";
+        else trkSize="10T";
+        
+        // 查找非FBA仓库的包车价格
+        var truckP={
+          "JCL天户町":{"2T":29000,"4T":35000,"10T":46000},
+          "乐天流山":{"2T":32000,"4T":38000,"10T":48000},
+          "JCL箕面":{"2T":0,"4T":95000,"10T":135000},
+          "谷仓上尾":{"2T":32000,"4T":40000,"10T":50000},
+          "JCL六方町":{"2T":29000,"4T":35000,"10T":46000}
+        };
+        var fp=(truckP[w]||{})[trkSize]||0;
+        if(fp>0){
+          dJ=Math.round(fp/r);
+          // 更新车型选择框
+          var trkSel=document.getElementById("trk");
+          trkSel.value=trkSize;
+          alert("三边和超过260cm，已自动切换为"+trkSize+"包车\n包车费用："+fp+" JPY");
+        }else{
+          alert("货物三边和超过260cm，请手动选择包车模式");
+        }
+      }
       d20=Math.round(dJ);d40=d20;
     }
     document.getElementById("ab20").textContent=fm(ab20);
@@ -473,7 +509,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     document.getElementById("s4").textContent=Math.round(tKg);
     var bd=document.getElementById("bd");bd.innerHTML="";
     if(md!=="total"){
-      for(var i=0;i<rows.length;i++){var ri=rows[i];var cbm=ri.L*ri.W*ri.H/1e6*ri.q;var trvR=trv(ri.sum3,ri.kg,tp,z,w);var tr=document.createElement("tr");tr.innerHTML="<td>"+(i+1)+"</td><td class=n>"+ri.q+"</td><td class=n>"+ri.kg.toFixed(1)+"</td><td class=n>"+ri.L+"</td><td class=n>"+ri.W+"</td><td class=n>"+ri.H+"</td><td class=n>"+(ri.kg*ri.q).toFixed(1)+"</td><td class=n>"+ri.sum3+"</td><td class=n>"+cbm.toFixed(4)+"</td><td>"+trvR.tier+"</td><td class=n>"+trvR.price+"</td>";bd.appendChild(tr);}
+      for(var i=0;i<rows.length;i++){var ri=rows[i];var cbm=ri.L*ri.W*ri.H/1e6*ri.q;var trvR=trv(ri.sum3,ri.kg,tp,z,w,ri.L,ri.W,ri.H);var tr=document.createElement("tr");tr.innerHTML="<td>"+(i+1)+"</td><td class=n>"+ri.q+"</td><td class=n>"+ri.kg.toFixed(1)+"</td><td class=n>"+ri.L+"</td><td class=n>"+ri.W+"</td><td class=n>"+ri.H+"</td><td class=n>"+(ri.kg*ri.q).toFixed(1)+"</td><td class=n>"+ri.sum3+"</td><td class=n>"+cbm.toFixed(4)+"</td><td>"+trvR.tier+"</td><td class=n>"+trvR.price+"</td>";bd.appendChild(tr);}
       document.getElementById("det").className="det sh";
     }else{
       document.getElementById("det").className="det";
