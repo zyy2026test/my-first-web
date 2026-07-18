@@ -490,7 +490,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
         };
         var fp=(truckP[w]||{})[trkSize]||0;
         if(fp>0){
-          dJ=Math.round(fp/r);
+          dJ=fp;  // 包车价格已经是JPY，无需转换
           // 更新车型选择框
           var trkSel=document.getElementById("trk");
           trkSel.value=trkSize;
