@@ -453,7 +453,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
       alert("总方数模式仅支持1~3区，4区以上请使用多件模式输入详细尺寸");
       return;
     }
-    var d20,d40;
+    var d20,d40,needTruck=false;  // needTruck提升到外层作用域
     if(tp==="truck"){
       if(!TP[w]){alert("无此仓库代码包车价格");return}
       var sz=document.getElementById("trk").value;
@@ -465,7 +465,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
       d20=Math.round(3500*1.1*tCBM);d40=d20;
     }else{
       // pc 或 green：所有区都用价格表（含超尺寸附加）
-      var dJ=0,needTruck=false;
+      var dJ=0;
       for(var i=0;i<rows.length;i++){
         var ri=rows[i];
         var trvR=trv(ri.sum3,ri.kg,tp,z,w,ri.L,ri.W,ri.H);
@@ -509,7 +509,9 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     document.getElementById("d40").textContent=fm(d40);
     document.getElementById("t40").textContent=fm(ab40+d40);
     document.getElementById("up40").textContent=tCBM>0?Math.round((ab40+d40)*r/tCBM).toLocaleString()+" CNY/m³":"-";
-    document.getElementById("tl").textContent={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp]+" "+w+"【"+z+"区】";
+    // 自动转包车时，标题显示"包车"而非"拼车"
+    var displayTp = (tp==="pc" && needTruck && z===7) ? "truck" : tp;
+    document.getElementById("tl").textContent={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[displayTp]+" "+w+"【"+z+"区】";
     document.getElementById("s2").textContent=tQty;
     document.getElementById("s3").textContent=tCBM.toFixed(3);
     document.getElementById("s4").textContent=Math.round(tKg);
