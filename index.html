@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>固税运费计算器</title>
+<title>固税运费计算�?/title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f2f5;min-height:100vh;font-size:17px}
@@ -68,14 +68,14 @@ tr:hover td{background:#f8f9ff}
 <body>
 <div class="wrap">
 <div class="hh">
-  <h1>固税运费计算器</h1>
+  <h1>固税运费计算�?/h1>
   <p>单件/批量 × 拼车/绿盒/包车 × 20GP/40HQ &nbsp;|&nbsp; 汇率默认 0.048</p>
 </div>
 <div class="c">
   <div class="btn-row" style="align-items:flex-end;gap:10px">
     <button class="mbtn" id="bSng">单一尺寸</button>
     <button class="mbtn on" id="bMlt">多件/批量</button>
-    <button class="mbtn" id="bTot">总方数</button>
+    <button class="mbtn" id="bTot">总方�?/button>
     <div class="g" style="max-width:120px;margin-left:auto">
       <label style="font-size:.7rem;color:#666">汇率默认 0.048</label>
       <input type="number" id="rt" value="0.048" step=".0001" style="padding:6px 8px;font-size:.85rem">
@@ -86,81 +86,81 @@ tr:hover td{background:#f8f9ff}
       <div style="display:flex;gap:5px;align-items:center">
         <select id="wh">
           <option value="">- 仓库 -</option>
-          <option value="HND9">HND9 (1区)</option>
-          <option value="NRT1">NRT1 (1区)</option>
-          <option value="NRT2">NRT2 (1区)</option>
-          <option value="TPF6">TPF6 (1区)</option>
-          <option value="HND2">HND2 (2区)</option>
-          <option value="HND3">HND3 (2区)</option>
-          <option value="NRT5">NRT5 (2区)</option>
-          <option value="TPF2">TPF2 (2区)</option>
-          <option value="TPFA">TPFA (2区)</option>
-          <option value="TYO1">TYO1 (2区)</option>
-          <option value="TYO2">TYO2 (2区)</option>
-          <option value="TYO3">TYO3 (2区)</option>
-          <option value="VJVN">VJVN (2区)</option>
-          <option value="FSZ1">FSZ1 (3区)</option>
-          <option value="HFY1">HFY1 (3区)</option>
-          <option value="HFY2">HFY2 (3区)</option>
-          <option value="HND6">HND6 (3区)</option>
-          <option value="HND8">HND8 (3区)</option>
-          <option value="QCB1">QCB1 (3区)</option>
-          <option value="QCB3">QCB3 (3区)</option>
-          <option value="QCB4">QCB4 (3区)</option>
-          <option value="QCB5">QCB5 (3区)</option>
-          <option value="TPB1">TPB1 (3区)</option>
-          <option value="TPB2">TPB2 (3区)</option>
-          <option value="TPB5">TPB5 (3区)</option>
-          <option value="TPB7">TPB7 (3区)</option>
-          <option value="TPF9">TPF9 (3区)</option>
-          <option value="TPFB">TPFB (3区)</option>
-          <option value="TPFC">TPFC (3区)</option>
-          <option value="TPFG">TPFG (3区)</option>
-          <option value="TPX2">TPX2 (3区)</option>
-          <option value="TPB9">TPB9 (3区)</option>
-          <option value="TPY3">TPY3 (3区)</option>
-          <option value="TYO4">TYO4 (3区)</option>
-          <option value="TYO6">TYO6 (3区)</option>
-          <option value="TYO7">TYO7 (3区)</option>
-          <option value="TYO8">TYO8 (3区)</option>
-          <option value="TYO9">TYO9 (3区)</option>
-          <option value="VJNA">VJNA (3区)</option>
-          <option value="VJND">VJND (3区)</option>
-          <option value="VJNE">VJNE (3区)</option>
-          <option value="VJNJ">VJNJ (3区)</option>
-          <option value="XHD1">XHD1 (3区)</option>
-          <option value="XJE1">XJE1 (3区)</option>
-          <option value="XJE2">XJE2 (3区)</option>
-          <option value="NGO2">NGO2 (4区)</option>
-          <option value="NGO3">NGO3 (4区)</option>
-          <option value="TPN2">TPN2 (4区)</option>
-          <option value="TPB8">TPB8 (4区)</option>
-          <option value="TPF4">TPF4 (4区)</option>
-          <option value="KIX1">KIX1 (5区)</option>
-          <option value="KIX2">KIX2 (5区)</option>
-          <option value="KIX3">KIX3 (5区)</option>
-          <option value="KIX4">KIX4 (5区)</option>
-          <option value="KIX5">KIX5 (5区)</option>
-          <option value="KIX6">KIX6 (5区)</option>
-          <option value="TPF3">TPF3 (5区)</option>
-          <option value="TPFD">TPFD (5区)</option>
-          <option value="TPN3">TPN3 (5区)</option>
-          <option value="VJNB">VJNB (5区)</option>
-          <option value="VJNC">VJNC (5区)</option>
-          <option value="XKX3">XKX3 (5区)</option>
-          <option value="XKX4">XKX4 (5区)</option>
-          <option value="TPB3">TPB3 (5区)</option>
-          <option value="TPB6">TPB6 (5区)</option>
-          <option value="XJW1">XJW1 (5区)</option>
-          <option value="HSG1">HSG1 (6区)</option>
-          <option value="HSR1">HSR1 (6区)</option>
-          <option value="JCL天户町">JCL天户町 (非FBA)</option>
+          <option value="HND9">HND9 (1�?</option>
+          <option value="NRT1">NRT1 (1�?</option>
+          <option value="NRT2">NRT2 (1�?</option>
+          <option value="TPF6">TPF6 (1�?</option>
+          <option value="HND2">HND2 (2�?</option>
+          <option value="HND3">HND3 (2�?</option>
+          <option value="NRT5">NRT5 (2�?</option>
+          <option value="TPF2">TPF2 (2�?</option>
+          <option value="TPFA">TPFA (2�?</option>
+          <option value="TYO1">TYO1 (2�?</option>
+          <option value="TYO2">TYO2 (2�?</option>
+          <option value="TYO3">TYO3 (2�?</option>
+          <option value="VJVN">VJVN (2�?</option>
+          <option value="FSZ1">FSZ1 (3�?</option>
+          <option value="HFY1">HFY1 (3�?</option>
+          <option value="HFY2">HFY2 (3�?</option>
+          <option value="HND6">HND6 (3�?</option>
+          <option value="HND8">HND8 (3�?</option>
+          <option value="QCB1">QCB1 (3�?</option>
+          <option value="QCB3">QCB3 (3�?</option>
+          <option value="QCB4">QCB4 (3�?</option>
+          <option value="QCB5">QCB5 (3�?</option>
+          <option value="TPB1">TPB1 (3�?</option>
+          <option value="TPB2">TPB2 (3�?</option>
+          <option value="TPB5">TPB5 (3�?</option>
+          <option value="TPB7">TPB7 (3�?</option>
+          <option value="TPF9">TPF9 (3�?</option>
+          <option value="TPFB">TPFB (3�?</option>
+          <option value="TPFC">TPFC (3�?</option>
+          <option value="TPFG">TPFG (3�?</option>
+          <option value="TPX2">TPX2 (3�?</option>
+          <option value="TPB9">TPB9 (3�?</option>
+          <option value="TPY3">TPY3 (3�?</option>
+          <option value="TYO4">TYO4 (3�?</option>
+          <option value="TYO6">TYO6 (3�?</option>
+          <option value="TYO7">TYO7 (3�?</option>
+          <option value="TYO8">TYO8 (3�?</option>
+          <option value="TYO9">TYO9 (3�?</option>
+          <option value="VJNA">VJNA (3�?</option>
+          <option value="VJND">VJND (3�?</option>
+          <option value="VJNE">VJNE (3�?</option>
+          <option value="VJNJ">VJNJ (3�?</option>
+          <option value="XHD1">XHD1 (3�?</option>
+          <option value="XJE1">XJE1 (3�?</option>
+          <option value="XJE2">XJE2 (3�?</option>
+          <option value="NGO2">NGO2 (4�?</option>
+          <option value="NGO3">NGO3 (4�?</option>
+          <option value="TPN2">TPN2 (4�?</option>
+          <option value="TPB8">TPB8 (4�?</option>
+          <option value="TPF4">TPF4 (4�?</option>
+          <option value="KIX1">KIX1 (5�?</option>
+          <option value="KIX2">KIX2 (5�?</option>
+          <option value="KIX3">KIX3 (5�?</option>
+          <option value="KIX4">KIX4 (5�?</option>
+          <option value="KIX5">KIX5 (5�?</option>
+          <option value="KIX6">KIX6 (5�?</option>
+          <option value="TPF3">TPF3 (5�?</option>
+          <option value="TPFD">TPFD (5�?</option>
+          <option value="TPN3">TPN3 (5�?</option>
+          <option value="VJNB">VJNB (5�?</option>
+          <option value="VJNC">VJNC (5�?</option>
+          <option value="XKX3">XKX3 (5�?</option>
+          <option value="XKX4">XKX4 (5�?</option>
+          <option value="TPB3">TPB3 (5�?</option>
+          <option value="TPB6">TPB6 (5�?</option>
+          <option value="XJW1">XJW1 (5�?</option>
+          <option value="HSG1">HSG1 (6�?</option>
+          <option value="HSR1">HSR1 (6�?</option>
+          <option value="JCL天户�?>JCL天户�?(非FBA)</option>
           <option value="乐天流山">乐天流山 (非FBA)</option>
           <option value="JCL箕面">JCL箕面 (非FBA)</option>
           <option value="谷仓上尾">谷仓上尾 (非FBA)</option>
-          <option value="JCL六方町">JCL六方町 (非FBA)</option>
+          <option value="JCL六方�?>JCL六方�?(非FBA)</option>
       </select>
-      <input id="whManual" placeholder="或直接输入代码" style="width:120px;border:1.5px dashed #aaa;border-radius:7px;padding:7px 8px;font-size:.82rem;outline:none;background:#fafafa;color:#333">
+      <input id="whManual" placeholder="或直接输入代�? style="width:120px;border:1.5px dashed #aaa;border-radius:7px;padding:7px 8px;font-size:.82rem;outline:none;background:#fafafa;color:#333">
     </div>
     </div>
   </div>
@@ -171,11 +171,11 @@ tr:hover td{background:#f8f9ff}
       <div class="g"><label>长cm</label><input type="number" id="sL" placeholder="cm"></div>
       <div class="g"><label>宽cm</label><input type="number" id="sW" placeholder="cm"></div>
       <div class="g"><label>高cm</label><input type="number" id="sH" placeholder="cm"></div>
-      <div class="g"><label>总重kg</label><input type="number" id="sT" step=".1" placeholder="件数&times;单件重"></div>
+      <div class="g"><label>总重kg</label><input type="number" id="sT" step=".1" placeholder="件数&times;单件�?></div>
     </div>
   </div>
   <div id="mA">
-    <textarea id="txt" placeholder="每行格式：件数 单件重KG 长 宽 高（件数为1时可省略）&#10;示例：&#10;150 11 58 39 27&#10;11 58 39 27（件数=1时可省略件数）"></textarea>
+    <textarea id="txt" placeholder="每行格式：件�?单件重KG �?�?高（件数�?时可省略�?#10;示例�?#10;150 11 58 39 27&#10;11 58 39 27（件�?1时可省略件数�?></textarea>
   </div>
   <div id="tA" style="display:none">
     <div class="sg">
@@ -200,7 +200,7 @@ tr:hover td{background:#f8f9ff}
       </select>
     </div>
   </div>
-  <div class="inf" id="inf">选择仓库，查看分区信息</div>
+  <div class="inf" id="inf">选择仓库，查看分区信�?/div>
   <div class="acts">
     <button class="b b1" id="calcBtn">计算</button>
     <button class="b b2" id="clrBtn">重置</button>
@@ -210,16 +210,16 @@ tr:hover td{background:#f8f9ff}
   <div class="rg">
     <div style="grid-column:1/-1;font-weight:600;font-size:.92rem;color:#1a73e8;margin-bottom:6px;text-align:center"><span id="tl">运费明细</span></div>
     <div class="rc">
-      <div class="rh r20">20GP <span id="fm20">ABC+D段合计</span></div>
-      <div class="dr"><div class="lb">ABC段</div><div class="vl" id="ab20">-</div></div>
-      <div class="dr"><div class="lb">D段</div><div class="vl" id="d20">-</div></div>
+      <div class="rh r20">20GP <span id="fm20">ABC+D段合�?/span></div>
+      <div class="dr"><div class="lb">ABC�?/div><div class="vl" id="ab20">-</div></div>
+      <div class="dr"><div class="lb">D�?/div><div class="vl" id="d20">-</div></div>
       <div class="dr fn"><div class="lb">合计</div><div class="vl" id="t20">-</div></div>
       <div class="dr up"><div class="lb">单价</div><div class="vl" id="up20">-</div></div>
     </div>
     <div class="rc">
-      <div class="rh r40">40HQ <span id="fm40">ABC+D段合计</span></div>
-      <div class="dr"><div class="lb">ABC段</div><div class="vl" id="ab40">-</div></div>
-      <div class="dr"><div class="lb">D段</div><div class="vl" id="d40">-</div></div>
+      <div class="rh r40">40HQ <span id="fm40">ABC+D段合�?/span></div>
+      <div class="dr"><div class="lb">ABC�?/div><div class="vl" id="ab40">-</div></div>
+      <div class="dr"><div class="lb">D�?/div><div class="vl" id="d40">-</div></div>
       <div class="dr fn"><div class="lb">合计</div><div class="vl" id="t40">-</div></div>
       <div class="dr up"><div class="lb">单价</div><div class="vl" id="up40">-</div></div>
     </div>
@@ -234,24 +234,24 @@ tr:hover td{background:#f8f9ff}
       </table>
     </div>
     <div class="st">
-      <div class="s"><div class="v" id="s2">0</div><div class="l">总件数</div></div>
+      <div class="s"><div class="v" id="s2">0</div><div class="l">总件�?/div></div>
       <div class="s"><div class="v" id="s3">0</div><div class="l">总体积cbm</div></div>
       <div class="s"><div class="v" id="s4">0</div><div class="l">总重量kg</div></div>
     </div>
   </div>
-  <div class="nt" id="nt">ABC段=基数/CBM x 总体积 | D段(1~3区)=固定3500xCBMx1.1 | D段(4~卅区)=按拼车报价</div>
+  <div class="nt" id="nt">ABC�?基数/CBM x 总体�?| D�?1~3�?=固定3500xCBMx1.1 | D�?4~卅区)=按拼车报�?/div>
 </div>
 </div>
 <script>
 (function(){
-  var Z={NRT1:1,NRT2:1,TPF6:1,HND9:1,HND3:2,HND2:2,NRT5:2,TPF2:2,TYO1:2,TYO2:2,TYO3:2,TPFA:2,VJVN:2,HND8:3,TPFB:3,FSZ1:3,HFY1:3,HFY2:3,TYO4:3,TPB5:3,TYO6:3,TYO7:3,TYO8:3,TYO9:3,TPX2:3,TPFC:3,TPB9:3,TPFG:3,FPFB:3,TPB2:3,TPB7:3,TPB1:3,TPF9:3,VJNA:3,VJND:3,VJNE:3,HND6:3,XHD1:3,XHD2:3,XHD3:3,QCB1:3,QCB2:3,QCB3:3,QCB4:3,QCB5:3,TPY3:3,VJNJ:3,VJU1:3,XJE1:3,XJE2:3,TPZ1:3,TPZ3:3,TPZ4:3,VGJT:3,谷仓:3,箕面仓:3,千叶市花见川:3,千叶县流山市:3,千叶县稻毛区六方町:3,NGO2:4,TPB8:4,TPF4:4,TPN2:4,NGO3:4,KIX1:5,KIX2:5,KIX3:5,KIX4:5,KIX5:5,KIX6:5,TPF3:5,TPFD:5,VJNB:5,VJNC:5,TPN3:5,VJWB:5,XKX3:5,XKX4:5,TPB3:5,TPB6:5,TPN1:5,TPFI:5,XJW1:5,QCB3:5,QCB4:5,QCB5:5,HSG1:6,HSR1:6,JCL天户町:7,乐天流山:7,JCL箕面:7,谷仓上尾:7,JCL六方町:7};
+  var Z={NRT1:1,NRT2:1,TPF6:1,HND9:1,HND3:2,HND2:2,NRT5:2,TPF2:2,TYO1:2,TYO2:2,TYO3:2,TPFA:2,VJVN:2,HND8:3,TPFB:3,FSZ1:3,HFY1:3,HFY2:3,TYO4:3,TPB5:3,TYO6:3,TYO7:3,TYO8:3,TYO9:3,TPX2:3,TPFC:3,TPB9:3,TPFG:3,FPFB:3,TPB2:3,TPB7:3,TPB1:3,TPF9:3,VJNA:3,VJND:3,VJNE:3,HND6:3,XHD1:3,XHD2:3,XHD3:3,QCB1:3,QCB2:3,QCB3:3,QCB4:3,QCB5:3,TPY3:3,VJNJ:3,VJU1:3,XJE1:3,XJE2:3,TPZ1:3,TPZ3:3,TPZ4:3,VGJT:3,谷仓:3,箕面�?3,千叶市花见川:3,千叶县流山市:3,千叶县稻毛区六方�?3,NGO2:4,TPB8:4,TPF4:4,TPN2:4,NGO3:4,KIX1:5,KIX2:5,KIX3:5,KIX4:5,KIX5:5,KIX6:5,TPF3:5,TPFD:5,VJNB:5,VJNC:5,TPN3:5,VJWB:5,XKX3:5,XKX4:5,TPB3:5,TPB6:5,TPN1:5,TPFI:5,XJW1:5,QCB3:5,QCB4:5,QCB5:5,HSG1:6,HSR1:6,JCL天户�?7,乐天流山:7,JCL箕面:7,谷仓上尾:7,JCL六方�?7};
   var RP={1:{140:520,160:620,180:870},2:{140:540,160:640,180:890},3:{140:560,160:660,180:920},4:{140:620,160:770,180:920},5:{140:720,160:870,180:1070},6:{140:1240,160:1470,180:1800}};
   var RG={1:{100:580,160:680,170:950,180:950},2:{100:580,160:680,170:950,180:950},3:{100:580,160:680,170:950,180:950},4:{100:660,160:880,170:990,180:1450},5:{100:770,160:930,170:1150,180:1530},6:{100:1310,160:1580,170:1940,180:2480}};
-  var TP={"FSZ1":{"2T":28000,"4T":35000,"10T":49000},"HFY1":{"2T":28000,"4T":35000,"10T":49000},"HND2":{"2T":28000,"4T":34000,"10T":46000},"HND3":{"2T":28000,"4T":34000,"10T":46000},"HND6":{"2T":25000,"4T":30000,"10T":43000},"HND8":{"2T":30000,"4T":34000,"10T":46000},"HND9":{"2T":25000,"4T":30000,"10T":43000},"HSG1":{"4T":155000,"10T":185000},"KIX1":{"4T":75000,"10T":115000},"KIX2":{"4T":75000,"10T":115000},"KIX3":{"4T":75000,"10T":115000},"KIX4":{"4T":75000,"10T":115000},"KIX5":{"4T":75000,"10T":115000},"KIX6":{"4T":75000,"10T":115000},"NGO2":{"4T":70000,"10T":95000},"NGO3":{"4T":70000,"10T":95000},"NRT1":{"2T":25000,"4T":30000,"10T":43000},"NRT2":{"2T":25000,"4T":30000,"10T":43000},"NRT5":{"2T":28000,"4T":34000,"10T":46000},"QCB1":{"2T":28000,"4T":34000,"10T":46000},"QCB3":{"2T":30000,"4T":37000,"10T":49000},"QCB4":{"2T":30000,"4T":37000,"10T":49000},"QCB5":{"2T":30000,"4T":37000,"10T":49000},"TPB1":{"2T":28000,"4T":34000,"10T":46000},"TPB2":{"2T":28000,"4T":34000,"10T":46000},"TPB5":{"2T":28000,"4T":34000,"10T":46000},"TPB7":{"2T":28000,"4T":34000,"10T":46000},"TPB8":{"4T":70000,"10T":95000},"TPF2":{"2T":28000,"4T":34000,"10T":46000},"TPF3":{"4T":80000,"10T":115000},"TPF4":{"4T":70000,"10T":95000},"TPF6":{"2T":28000,"4T":34000,"10T":48000},"TPF9":{"2T":25000,"4T":30000,"10T":43000},"TPFA":{"2T":28000,"4T":34000,"10T":48000},"TPFB":{"2T":28000,"4T":34000,"10T":46000},"TPFC":{"2T":28000,"4T":34000,"10T":48000},"TPFD":{"4T":80000,"10T":115000},"TPFG":{"2T":28000,"4T":34000,"10T":46000},"TPFI":{"2T":30000,"4T":37000,"10T":49000},"TPN1":{"2T":30000,"4T":37000,"10T":49000},"TPN2":{"4T":70000,"10T":95000},"TPN3":{"4T":80000,"10T":115000},"TPB3":{"4T":85000,"10T":120000},"XJW1":{"4T":85000,"10T":120000},"TPB6":{"4T":85000,"10T":120000},"TPX1":{"2T":30000,"4T":37000,"10T":49000},"TPX2":{"2T":28000,"4T":34000,"10T":46000},"TPY3":{"2T":30000},"TPZ1":{"2T":30000,"4T":37000,"10T":49000},"TPZ2":{"4T":75000,"10T":100000},"TPZ3":{"2T":28000,"4T":34000,"10T":46000},"TPZ4":{"2T":28000,"4T":34000,"10T":46000},"TYO1":{"2T":28000,"4T":34000,"10T":46000},"TYO2":{"2T":28000,"4T":34000,"10T":46000},"TYO3":{"2T":28000,"4T":34000,"10T":46000},"TYO4":{"2T":28000,"4T":34000,"10T":46000},"TYO6":{"2T":28000,"4T":34000,"10T":46000},"TYO7":{"2T":28000,"4T":34000,"10T":46000},"TYO8":{"2T":28000,"4T":34000,"10T":46000},"TYO9":{"2T":28000,"4T":34000,"10T":46000},"VJNA":{"2T":28000,"4T":34000,"10T":46000},"VJNB":{"4T":75000,"10T":115000},"VJNC":{"4T":75000,"10T":115000},"VJND":{"2T":28000,"4T":34000,"10T":46000},"VJNE":{"2T":30000,"4T":37000,"10T":49000},"VJWB":{"4T":75000,"10T":100000},"VGJT":{"2T":28000,"4T":34000,"10T":46000},"XHD1":{"2T":28000,"4T":34000,"10T":46000},"XJE1":{"2T":30000,"4T":37000,"10T":49000},"XJE2":{"2T":30000,"4T":37000,"10T":49000},"XKX2":{"4T":75000,"10T":100000},"XKX3":{"4T":75000,"10T":100000},"XKX4":{"4T":75000,"10T":100000},"谷仓":{"2T":32000,"4T":40000,"10T":50000},"箕面仓":{"4T":95000,"10T":135000},"千叶市花见川":{"2T":29000,"4T":35000,"10T":46000},"千叶县流山市":{"2T":32000,"4T":38000,"10T":48000},"千叶县稻毛区六方町":{"2T":29000,"4T":35000,"10T":46000}};
+  var TP={"FSZ1":{"2T":28000,"4T":35000,"10T":49000},"HFY1":{"2T":28000,"4T":35000,"10T":49000},"HND2":{"2T":28000,"4T":34000,"10T":46000},"HND3":{"2T":28000,"4T":34000,"10T":46000},"HND6":{"2T":25000,"4T":30000,"10T":43000},"HND8":{"2T":30000,"4T":34000,"10T":46000},"HND9":{"2T":25000,"4T":30000,"10T":43000},"HSG1":{"4T":155000,"10T":185000},"KIX1":{"4T":75000,"10T":115000},"KIX2":{"4T":75000,"10T":115000},"KIX3":{"4T":75000,"10T":115000},"KIX4":{"4T":75000,"10T":115000},"KIX5":{"4T":75000,"10T":115000},"KIX6":{"4T":75000,"10T":115000},"NGO2":{"4T":70000,"10T":95000},"NGO3":{"4T":70000,"10T":95000},"NRT1":{"2T":25000,"4T":30000,"10T":43000},"NRT2":{"2T":25000,"4T":30000,"10T":43000},"NRT5":{"2T":28000,"4T":34000,"10T":46000},"QCB1":{"2T":28000,"4T":34000,"10T":46000},"QCB3":{"2T":30000,"4T":37000,"10T":49000},"QCB4":{"2T":30000,"4T":37000,"10T":49000},"QCB5":{"2T":30000,"4T":37000,"10T":49000},"TPB1":{"2T":28000,"4T":34000,"10T":46000},"TPB2":{"2T":28000,"4T":34000,"10T":46000},"TPB5":{"2T":28000,"4T":34000,"10T":46000},"TPB7":{"2T":28000,"4T":34000,"10T":46000},"TPB8":{"4T":70000,"10T":95000},"TPF2":{"2T":28000,"4T":34000,"10T":46000},"TPF3":{"4T":80000,"10T":115000},"TPF4":{"4T":70000,"10T":95000},"TPF6":{"2T":28000,"4T":34000,"10T":48000},"TPF9":{"2T":25000,"4T":30000,"10T":43000},"TPFA":{"2T":28000,"4T":34000,"10T":48000},"TPFB":{"2T":28000,"4T":34000,"10T":46000},"TPFC":{"2T":28000,"4T":34000,"10T":48000},"TPFD":{"4T":80000,"10T":115000},"TPFG":{"2T":28000,"4T":34000,"10T":46000},"TPFI":{"2T":30000,"4T":37000,"10T":49000},"TPN1":{"2T":30000,"4T":37000,"10T":49000},"TPN2":{"4T":70000,"10T":95000},"TPN3":{"4T":80000,"10T":115000},"TPB3":{"4T":85000,"10T":120000},"XJW1":{"4T":85000,"10T":120000},"TPB6":{"4T":85000,"10T":120000},"TPX1":{"2T":30000,"4T":37000,"10T":49000},"TPX2":{"2T":28000,"4T":34000,"10T":46000},"TPY3":{"2T":30000},"TPZ1":{"2T":30000,"4T":37000,"10T":49000},"TPZ2":{"4T":75000,"10T":100000},"TPZ3":{"2T":28000,"4T":34000,"10T":46000},"TPZ4":{"2T":28000,"4T":34000,"10T":46000},"TYO1":{"2T":28000,"4T":34000,"10T":46000},"TYO2":{"2T":28000,"4T":34000,"10T":46000},"TYO3":{"2T":28000,"4T":34000,"10T":46000},"TYO4":{"2T":28000,"4T":34000,"10T":46000},"TYO6":{"2T":28000,"4T":34000,"10T":46000},"TYO7":{"2T":28000,"4T":34000,"10T":46000},"TYO8":{"2T":28000,"4T":34000,"10T":46000},"TYO9":{"2T":28000,"4T":34000,"10T":46000},"VJNA":{"2T":28000,"4T":34000,"10T":46000},"VJNB":{"4T":75000,"10T":115000},"VJNC":{"4T":75000,"10T":115000},"VJND":{"2T":28000,"4T":34000,"10T":46000},"VJNE":{"2T":30000,"4T":37000,"10T":49000},"VJWB":{"4T":75000,"10T":100000},"VGJT":{"2T":28000,"4T":34000,"10T":46000},"XHD1":{"2T":28000,"4T":34000,"10T":46000},"XJE1":{"2T":30000,"4T":37000,"10T":49000},"XJE2":{"2T":30000,"4T":37000,"10T":49000},"XKX2":{"4T":75000,"10T":100000},"XKX3":{"4T":75000,"10T":100000},"XKX4":{"4T":75000,"10T":100000},"谷仓":{"2T":32000,"4T":40000,"10T":50000},"箕面�?:{"4T":95000,"10T":135000},"千叶市花见川":{"2T":29000,"4T":35000,"10T":46000},"千叶县流山市":{"2T":32000,"4T":38000,"10T":48000},"千叶县稻毛区六方�?:{"2T":29000,"4T":35000,"10T":46000}};
   var md="multi",tp="pc",prevZ=4,skipUpd=false;
   function sw(m){md=m;document.getElementById("bSng").className="mbtn"+(m==="single"?" on":"");document.getElementById("bMlt").className="mbtn"+(m==="multi"?" on":"");document.getElementById("bTot").className="mbtn"+(m==="total"?" on":"");document.getElementById("sA").style.display=m==="single"?"block":"none";document.getElementById("mA").style.display=m==="multi"?"block":"none";document.getElementById("tA").style.display=m==="total"?"block":"none";document.getElementById("txt").style.height=m==="multi"?"100px":"200px";}
-  function st(t){tp=t;document.getElementById("tPc").className="tbtn"+(t==="pc"?" on":"");document.getElementById("tGr").className="tbtn"+(t==="green"?" on":"");document.getElementById("tMix").className="tbtn"+(t==="mix"?" on":"");document.getElementById("tTr").className="tbtn"+(t==="truck"?" on":"");document.getElementById("trkA").className=t==="truck"?"trk sh":"trk";if(t==="truck"){var w=document.getElementById("wh").value;var trkSel=document.getElementById("trk");var avail=TP[w]||{};var trkOpts=[{v:"2T",l:"2T = 1500KG / 8CBM"},{v:"4T",l:"4T = 2500KG / 18CBM"},{v:"10T",l:"10T = 10000KG / 30CBM"}];var html="";for(var i=0;i<trkOpts.length;i++){var v=trkOpts[i].v;if(avail[v]){var sel=v==="4T"?" selected":"";html+='<option value="'+v+'"'+sel+'>'+trkOpts[i].l+"</option>";}}if(!html){html='<option value="">此仓库无包车价格</option>';trkSel.disabled=true;}else{trkSel.disabled=false;}trkSel.innerHTML=html;}var nf={pc:"Σ(件数×档位单价)",green:"Σ(件数×尺寸档单价)",mix:"CBM x 3500 x 1.1",truck:"固定押价/汇率"}[t];document.getElementById("fm20").textContent=nf;document.getElementById("fm40").textContent=nf;document.getElementById("nt").textContent={pc:"拼车: 140桥:≤140cm且≤20kg | 160桥:≤160cm且≤30kg | 180桥:>160cm或>30kg | 超180cm每20cm+320(1~3区)/340(4~6区) | 超50kg每10kg+320(1~3区)/340(4~6区) | 1区520/620/870 2区540/640/890 3区560/660/920 4区620/770/920 5区720/870/1070 6区1240/1470/1800",green:"绿盒: 尺寸+重量双条件判断(同时满足) | 1-3区(12仓):100cm/10kg/580,160/30/680,170/50/950,180/60/950,180+每20cm加490 | 4-6区:100cm/10kg,160/30,170/50,180/60,200/80,220/110,240/140,260/180,280/220,300/280 | 4区:100=660/160=880/170=990/180=1450/200=1950/220=2420/240=3010/260=3690/280=4490/300=5370 | 5区:100=770/160=930/170=1150/180=1530/200=2070/220=2570/240=3210/260=3940/280=4800/300=5750 | 6区:100=1310/160=1580/170=1940/180=2480/200=3380/220=4310/240=5470/260=6830/280=8410/300=10150",mix:"混载(1~3区): D段=3500 x 总CBM x 1.1",truck:"包车: 固定押价按仓库车型 | 2T=1500KG/8CBM 4T=2500KG/18CBM 10T=10000KG/30CBM"}[t];upd();}
-  function upd(){var w=document.getElementById("wh").value||document.getElementById("whManual").value.trim().toUpperCase();var z=Z[w]||0;var i=document.getElementById("inf");if(!w){i.textContent="选择仓库，查看分区信息";i.style.cssText="background:#f0f4ff;border-left:4px solid #1a73e8";document.getElementById("tMix").style.display="none";if(tp==="truck"){var trkSel=document.getElementById("trk");trkSel.innerHTML='<option value="">请先选择仓库</option>';trkSel.disabled=true;}return}var zn={1:"1区",2:"2区",3:"3区",4:"4区",5:"5区",6:"6区",7:"非FBA仓"}[z];
+  function st(t){tp=t;document.getElementById("tPc").className="tbtn"+(t==="pc"?" on":"");document.getElementById("tGr").className="tbtn"+(t==="green"?" on":"");document.getElementById("tMix").className="tbtn"+(t==="mix"?" on":"");document.getElementById("tTr").className="tbtn"+(t==="truck"?" on":"");document.getElementById("trkA").className=t==="truck"?"trk sh":"trk";if(t==="truck"){var w=document.getElementById("wh").value;var trkSel=document.getElementById("trk");var avail=TP[w]||{};var trkOpts=[{v:"2T",l:"2T = 1500KG / 8CBM"},{v:"4T",l:"4T = 2500KG / 18CBM"},{v:"10T",l:"10T = 10000KG / 30CBM"}];var html="";for(var i=0;i<trkOpts.length;i++){var v=trkOpts[i].v;if(avail[v]){var sel=v==="4T"?" selected":"";html+='<option value="'+v+'"'+sel+'>'+trkOpts[i].l+"</option>";}}if(!html){html='<option value="">此仓库无包车价格</option>';trkSel.disabled=true;}else{trkSel.disabled=false;}trkSel.innerHTML=html;}var nf={pc:"Σ(件数×档位单价)",green:"Σ(件数×尺寸档单�?",mix:"CBM x 3500 x 1.1",truck:"固定押价/汇率"}[t];document.getElementById("fm20").textContent=nf;document.getElementById("fm40").textContent=nf;document.getElementById("nt").textContent={pc:"拼车: 140�?�?40cm且≤20kg | 160�?�?60cm且≤30kg | 180�?>160cm�?30kg | �?80cm�?0cm+320(1~3�?/340(4~6�? | �?0kg�?0kg+320(1~3�?/340(4~6�? | 1�?20/620/870 2�?40/640/890 3�?60/660/920 4�?20/770/920 5�?20/870/1070 6�?240/1470/1800",green:"绿盒: 尺寸+重量双条件判�?同时满足) | 1-3�?12�?:100cm/10kg/580,160/30/680,170/50/950,180/60/950,180+�?0cm�?90 | 4-6�?100cm/10kg,160/30,170/50,180/60,200/80,220/110,240/140,260/180,280/220,300/280 | 4�?100=660/160=880/170=990/180=1450/200=1950/220=2420/240=3010/260=3690/280=4490/300=5370 | 5�?100=770/160=930/170=1150/180=1530/200=2070/220=2570/240=3210/260=3940/280=4800/300=5750 | 6�?100=1310/160=1580/170=1940/180=2480/200=3380/220=4310/240=5470/260=6830/280=8410/300=10150",mix:"混载(1~3�?: D�?3500 x 总CBM x 1.1",truck:"包车: 固定押价按仓库车�?| 2T=1500KG/8CBM 4T=2500KG/18CBM 10T=10000KG/30CBM"}[t];upd();}
+  function upd(){var w=document.getElementById("wh").value||document.getElementById("whManual").value.trim().toUpperCase();var z=Z[w]||0;var i=document.getElementById("inf");if(!w){i.textContent="选择仓库，查看分区信�?;i.style.cssText="background:#f0f4ff;border-left:4px solid #1a73e8";document.getElementById("tMix").style.display="none";if(tp==="truck"){var trkSel=document.getElementById("trk");trkSel.innerHTML='<option value="">请先选择仓库</option>';trkSel.disabled=true;}return}var zn={1:"1�?,2:"2�?,3:"3�?,4:"4�?,5:"5�?,6:"6�?,7:"非FBA�?}[z];
 if(z>3&&tp==="mix"){
   tp="pc";
   document.getElementById("tPc").className="tbtn on";
@@ -261,7 +261,7 @@ if(z>3&&tp==="mix"){
   document.getElementById("trkA").className="trk";
   document.getElementById("fm20").textContent="Σ(件数×档位单价)";
   document.getElementById("fm40").textContent="Σ(件数×档位单价)";
-  document.getElementById("nt").textContent="拼车: 140桥≤140cm且≤20kg | 160桥≤160cm且≤30kg | 180桥>160cm或>30kg | 超180cm每20cm+320(1~3区)/340(4~6区) | 超50kg每10kg+320(1~3区)/340(4~6区)";
+  document.getElementById("nt").textContent="拼车: 140桥≤140cm且≤20kg | 160桥≤160cm且≤30kg | 180�?160cm�?30kg | �?80cm�?0cm+320(1~3�?/340(4~6�? | �?0kg�?0kg+320(1~3�?/340(4~6�?";
 }
 if(z<=3&&prevZ>3){
   tp="mix";
@@ -272,29 +272,29 @@ if(z<=3&&prevZ>3){
   document.getElementById("trkA").className="trk";
   document.getElementById("fm20").textContent="CBM x 3500 x 1.1";
   document.getElementById("fm40").textContent="CBM x 3500 x 1.1";
-  document.getElementById("nt").textContent="混载(1~3区): D段=3500 x 总CBM x 1.1";
+  document.getElementById("nt").textContent="混载(1~3�?: D�?3500 x 总CBM x 1.1";
 }
 prevZ=z;
-var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWarn=(tp==="truck"&&!TP[w])?" 【此仓库无包车价格】":"";i.textContent="已选 "+w+"【"+zn+"】 | "+tn+"计费"+truckWarn;i.style.cssText=z===7?"background:#fff3e0;border-left:4px solid #ff9800":z<=3?"background:#e8f4fd;border-left:4px solid #1a73e8":"background:#e8f5e9;border-left:4px solid #2e7d32";document.getElementById("tMix").style.display=z<=3?"inline-block":"none";document.getElementById("tGr").style.display=z===7?"none":"inline-block";document.getElementById("tTr").style.display=z===7?"none":"inline-block";if(z===7){document.getElementById("tMix").style.display="none";if(tp!=="pc"){tp="pc";document.getElementById("tPc").className="tbtn on";document.getElementById("tGr").className="tbtn";document.getElementById("tMix").className="tbtn";document.getElementById("tTr").className="tbtn";document.getElementById("trkA").className="trk";}var nt7={JCL天户町:"非FBA: 140内560/140-160710/160以上810 JPY",JCL箕面:"非FBA: 140内650/140-160900/160以上1000 JPY",谷仓上尾:"非FBA: 140内580/140-160780/160以上880 JPY",JCL六方町:"非FBA: 160内560/160-260760/260以上1000 JPY",乐天流山:"非FBA: 统一580 JPY/件"}[w]||"";document.getElementById("nt").textContent=nt7;}if(tp==="truck"){var avail=TP[w]||{};var trkOpts=[{v:"2T",l:"2T = 1500KG / 8CBM"},{v:"4T",l:"4T = 2500KG / 18CBM"},{v:"10T",l:"10T = 10000KG / 30CBM"}];var trkSel=document.getElementById("trk");var html="";var hasAny=false;for(var ii=0;ii<trkOpts.length;ii++){var vv=trkOpts[ii].v;if(avail[vv]){hasAny=true;var sel=vv==="4T"?" selected":"";html+='<option value="'+vv+'"'+sel+'>'+trkOpts[ii].l+"</option>";}}if(!hasAny){html='<option value="">此仓库无包车价格</option>';trkSel.disabled=true;}else{trkSel.disabled=false;}trkSel.innerHTML=html;}}
+var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWarn=(tp==="truck"&&!TP[w])?" 【此仓库无包车价格�?:"";i.textContent="已�?"+w+"�?+zn+"�?| "+tn+"计费"+truckWarn;i.style.cssText=z===7?"background:#fff3e0;border-left:4px solid #ff9800":z<=3?"background:#e8f4fd;border-left:4px solid #1a73e8":"background:#e8f5e9;border-left:4px solid #2e7d32";document.getElementById("tMix").style.display=z<=3?"inline-block":"none";document.getElementById("tGr").style.display=z===7?"none":"inline-block";document.getElementById("tTr").style.display=z===7?"none":"inline-block";if(z===7){document.getElementById("tMix").style.display="none";if(tp!=="pc"&&tp!=="truck"){tp="pc";document.getElementById("tPc").className="tbtn on";document.getElementById("tGr").className="tbtn";document.getElementById("tMix").className="tbtn";document.getElementById("tTr").className="tbtn";document.getElementById("trkA").className="trk";}var nt7={JCL天户�?"非FBA: 140�?60/140-160710/160以上810 JPY",JCL箕面:"非FBA: 140�?50/140-160900/160以上1000 JPY",谷仓上尾:"非FBA: 140�?80/140-160780/160以上880 JPY",JCL六方�?"非FBA: 160�?60/160-260760/260以上1000 JPY",乐天流山:"非FBA: 统一580 JPY/�?}[w]||"";document.getElementById("nt").textContent=nt7;}if(tp==="truck"){var avail=TP[w]||{};var trkOpts=[{v:"2T",l:"2T = 1500KG / 8CBM"},{v:"4T",l:"4T = 2500KG / 18CBM"},{v:"10T",l:"10T = 10000KG / 30CBM"}];var trkSel=document.getElementById("trk");var html="";var hasAny=false;for(var ii=0;ii<trkOpts.length;ii++){var vv=trkOpts[ii].v;if(avail[vv]){hasAny=true;var sel=vv==="4T"?" selected":"";html+='<option value="'+vv+'"'+sel+'>'+trkOpts[ii].l+"</option>";}}if(!hasAny){html='<option value="">此仓库无包车价格</option>';trkSel.disabled=true;}else{trkSel.disabled=false;}trkSel.innerHTML=html;}}
   function fm(n){return Math.round(n).toLocaleString()+" JPY"};
   var pcOvr={1:320,2:320,3:320,4:340,5:340,6:340};
 
   function trv(s,kg,t,z,w,L,W,H){
     var wkg=t==="pc"?20:10,skg=t==="pc"?30:20;
-    // 拼车基础价 (3 tiers × 6 zones) + oversize 320/340 per 20cm
+    // 拼车基础�?(3 tiers × 6 zones) + oversize 320/340 per 20cm
     var pcBase={
       1:{140:520,160:620,180:870},2:{140:540,160:640,180:890},3:{140:560,160:660,180:920},
       4:{140:620,160:770,180:920},5:{140:720,160:870,180:1070},6:{140:1240,160:1470,180:1800}
     };
     // 绿盒: 10 weight tiers × 4 zone groups
-    // zone 1-3仓: 4 size tiers (100/160/170/180), 180+ oversize +490 per 20cm
+    // zone 1-3�? 4 size tiers (100/160/170/180), 180+ oversize +490 per 20cm
     // zones 4/5/6: 10 size tiers (100~300), each size tier = direct price, no oversize
     var gP={
-      1:{100:580,160:680,170:950,180:950},          // zone1-3 (12仓)
+      1:{100:580,160:680,170:950,180:950},          // zone1-3 (12�?
       2:{100:580,160:680,170:950,180:950},          // zone1-3
       3:{100:580,160:680,170:950,180:950},          // zone1-3
-      4:{100:660,160:880,170:990,180:1450,200:1950,220:2420,240:3010,260:3690,280:4490,300:5370}, // zone4 (TPF4等5仓)
-      5:{100:770,160:930,170:1150,180:1530,200:2070,220:2570,240:3210,260:3940,280:4800,300:5750}, // zone5 (KIX1等16仓)
+      4:{100:660,160:880,170:990,180:1450,200:1950,220:2420,240:3010,260:3690,280:4490,300:5370}, // zone4 (TPF4�?�?
+      5:{100:770,160:930,170:1150,180:1530,200:2070,220:2570,240:3210,260:3940,280:4800,300:5750}, // zone5 (KIX1�?6�?
       6:{100:1310,160:1580,170:1940,180:2480,200:3380,220:4310,240:5470,260:6830,280:8410,300:10150}  // zone6 (HSR1)
     };
     if(t==="pc"){
@@ -302,43 +302,43 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
       var tier=(s<=140&&kg<=wkg)?"140":(s<=160&&kg<=skg)?"160":"180";
       var baseP=pcBase[z]?pcBase[z][tier]||0:0;
       var extra=0;
-      // 尺寸超180cm：每20cm加收 (1~3区320 / 4~6区340)
+      // 尺寸�?80cm：每20cm加收 (1~3�?20 / 4~6�?40)
       if(s>180){var overS=Math.ceil((s-180)/20);extra+=overS*(pcOvr[z]||0);}
-      // 重量超50kg：每10kg加收 (1~3区320 / 4~6区340)
+      // 重量�?0kg：每10kg加收 (1~3�?20 / 4~6�?40)
       if(kg>50){var overW=Math.ceil((kg-50)/10);extra+=overW*(pcOvr[z]||0);}
-      // 第7区非FBA仓：独立3档逻辑
+      // �?区非FBA仓：独立3档逻辑
       if(z===7){
-        // 非FBA仓库：按三边之和判断档位，超过260转包车
+        // 非FBA仓库：按三边之和判断档位，超�?60转包�?
         var tier_s = s<=140?"140":s<=160?"160":s<=260?"260":"truck";
         
         if(w==="乐天流山"){
           if(tier_s==="truck") return{tier:"超尺寸转包车",price:0,needTruck:true};
           return{tier:"统一",price:580};
         }
-        if(w==="JCL六方町"){
+        if(w==="JCL六方�?){
           if(tier_s==="truck") return{tier:"超尺寸转包车",price:0,needTruck:true};
           var pc7_l={140:560,160:560,260:760};
-          return{tier:tier_s+"档",price:pc7_l[tier_s]||560};
+          return{tier:tier_s+"�?,price:pc7_l[tier_s]||560};
         }
-        // JCL天户町 / JCL箕面 / 谷仓上尾
+        // JCL天户�?/ JCL箕面 / 谷仓上尾
         if(tier_s==="truck") return{tier:"超尺寸转包车",price:0,needTruck:true};
-        var pc7={JCL天户町:{140:560,160:710,260:810},JCL箕面:{140:650,160:900,260:1000},谷仓上尾:{140:580,160:780,260:880}};
+        var pc7={JCL天户�?{140:560,160:710,260:810},JCL箕面:{140:650,160:900,260:1000},谷仓上尾:{140:580,160:780,260:880}};
         var p7=(pc7[w]||{})[tier_s]||0;
-        return{tier:tier_s+"档",price:p7};
+        return{tier:tier_s+"�?,price:p7};
       }
       return{tier:tier,price:baseP+extra};
     }
     if(t==="green"){
       var gp=gP[z]||gP[1];
-      // 绿盒档位判断：尺寸和重量同时满足才能进入该档，否则进下一档
+      // 绿盒档位判断：尺寸和重量同时满足才能进入该档，否则进下一�?
       // zones 1-3: 4 tiers (100/160/170/180)
       // zones 4-6: 10 tiers (100/160/170/180/200/220/240/260/280/300)
       var tierKey;
       if(z<=3){
-        // 1-3区：4档判断
+        // 1-3区：4档判�?
         tierKey=(s<=100&&kg<=10)?100:(s<=160&&kg<=30)?160:(s<=170&&kg<=50)?170:180;
       }else{
-        // 4-6区：10档判断
+        // 4-6区：10档判�?
         tierKey=(s<=100&&kg<=10)?100:
                 (s<=160&&kg<=30)?160:
                 (s<=170&&kg<=50)?170:
@@ -404,24 +404,24 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
       var H=parseFloat(document.getElementById("sH").value);
       if(!L||!W||!H){alert("请填写长宽高");return}
       var tkg=kgT||(kg>0?kg*q:0);
-      if(!tkg){alert("请填写重量");return}
+      if(!tkg){alert("请填写重�?);return}
       rows.push({q:q,kg:tkg/q,L:L,W:W,H:H,sum3:L+W+H});
     }else if(md==="total"){
       var q=parseInt(document.getElementById("tQ").value)||1;
       var tKg=parseFloat(document.getElementById("tT").value)||0;
       var inputCBM=parseFloat(document.getElementById("tC").value)||0;
-      if(!tKg){alert("请填写总重量");return}
-      if(!inputCBM){alert("请填写总方数");return}
+      if(!tKg){alert("请填写总重�?);return}
+      if(!inputCBM){alert("请填写总方�?);return}
       var perKg=tKg/q, perCBM=inputCBM/q;
       var estL=Math.round(Math.pow(perCBM*1e6,1/3)), estW=estL, estH=estL;
       rows.push({q:q,kg:perKg,L:estL,W:estW,H:estH,sum3:estL+estW+estH,inputCBM:inputCBM});
     }else{
       var txt=document.getElementById("txt").value.trim();
-      if(!txt){alert("请输入多件数据");return}
+      if(!txt){alert("请输入多件数�?);return}
       var ls=txt.split("\n");
       for(var i=0;i<ls.length;i++){
         var ps=ls[i].split(/[\s,]+/);
-        // 支持两种格式：5字段(件数 重 长 宽 高) 或 4字段(重 长 宽 高,默认件数=1)
+        // 支持两种格式�?字段(件数 �?�?�?�? �?4字段(�?�?�?�?默认件数=1)
         if(ps.length>=4){
           var q,kg,L,W,H;
           if(ps.length>=5){
@@ -432,19 +432,19 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
           if(!isNaN(q)&&!isNaN(kg)&&!isNaN(L)&&!isNaN(W)&&!isNaN(H)&&q>0&&kg>0&&L>0&&W>0&&H>0)rows.push({q:q,kg:kg,L:L,W:W,H:H,sum3:L+W+H});
         }
       }
-      if(!rows.length){alert("多件数据格式错误，请检查：\n格式1：件数 单件重KG 长cm 宽cm 高cm\n格式2：单件重KG 长cm 宽cm 高cm（件数默认1）\n示例：\n150 11 58 39 27\n11 58 39 27（件数=1）");return}
+      if(!rows.length){alert("多件数据格式错误，请检查：\n格式1：件�?单件重KG 长cm 宽cm 高cm\n格式2：单件重KG 长cm 宽cm 高cm（件数默�?）\n示例：\n150 11 58 39 27\n11 58 39 27（件�?1�?);return}
     }
     if(!rows.length){
       if(md==="single"){alert("请填写长宽高");return}
-      if(md==="total"){alert("请填写总重量和总方数");return}
+      if(md==="total"){alert("请填写总重量和总方�?);return}
       alert("数据格式错误");return
     }
     var tCBM=0,tQty=0,tKg=0;
     if(md==="total"&&rows.length){
-      // 总方数模式：直接使用用户输入的总方数、总重、件数
+      // 总方数模式：直接使用用户输入的总方数、总重、件�?
       tCBM = rows[0].inputCBM;
       tQty = rows[0].q;
-      tKg = rows[0].kg * rows[0].q; // 单件重×件数=总重
+      tKg = rows[0].kg * rows[0].q; // 单件重×件�?总重
     }else{
       for(var i=0;i<rows.length;i++){var ri=rows[i];var cbm=ri.L*ri.W*ri.H/1e6*ri.q;tCBM+=cbm;tQty+=ri.q;tKg+=ri.kg*ri.q;}
     }
@@ -460,11 +460,11 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
       var fp=(TP[w]||{})[sz]||0;
       d20=Math.round(fp/r);d40=d20;
     }else if(tp==="mix"){
-      // 混载1~3区可用
-      if(z>3){alert("混载模式仅支持1~3区仓库");return}
+      // 混载1~3区可�?
+      if(z>3){alert("混载模式仅支�?~3区仓�?);return}
       d20=Math.round(3500*1.1*tCBM);d40=d20;
     }else{
-      // pc 或 green：所有区都用价格表（含超尺寸附加）
+      // pc �?green：所有区都用价格表（含超尺寸附加�?
       var dJ=0;
       for(var i=0;i<rows.length;i++){
         var ri=rows[i];
@@ -479,25 +479,25 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
         else if(tCBM<=18 && tKg<=2500) trkSize="4T";
         else trkSize="10T";
         
-        // 查找非FBA仓库的包车价格
+        // 查找非FBA仓库的包车价�?
         var truckP={
-          "JCL天户町":{"2T":29000,"4T":35000,"10T":46000},
+          "JCL天户�?:{"2T":29000,"4T":35000,"10T":46000},
           "乐天流山":{"2T":32000,"4T":38000,"10T":48000},
           "JCL箕面":{"2T":0,"4T":95000,"10T":135000},
           "谷仓上尾":{"2T":32000,"4T":40000,"10T":50000},
-          "JCL六方町":{"2T":29000,"4T":35000,"10T":46000}
+          "JCL六方�?:{"2T":29000,"4T":35000,"10T":46000}
         };
         var fp=(truckP[w]||{})[trkSize]||0;
         if(fp>0){
           dJ=fp;  // 包车价格已经是JPY，无需转换
-          // 更新车型选择框
+          // 更新车型选择�?
           var trkSel=document.getElementById("trk");
           trkSel.value=trkSize;
-          // 更新按钮状态：高亮“包车”按钮
+          // 更新按钮状态：高亮“包车”按�?
           st("truck");
-          alert("三边和超过260cm，已自动切换为"+trkSize+"包车\n包车费用："+fp+" JPY");
+          alert("三边和超�?60cm，已自动切换�?+trkSize+"包车\n包车费用�?+fp+" JPY");
         }else{
-          alert("货物三边和超过260cm，请手动选择包车模式");
+          alert("货物三边和超�?60cm，请手动选择包车模式");
         }
       }
       d20=Math.round(dJ);d40=d20;
@@ -510,9 +510,9 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     document.getElementById("d40").textContent=fm(d40);
     document.getElementById("t40").textContent=fm(ab40+d40);
     document.getElementById("up40").textContent=tCBM>0?Math.round((ab40+d40)*r/tCBM).toLocaleString()+" CNY/m³":"-";
-    // 自动转包车时，标题显示"包车"而非"拼车"
+    // 自动转包车时，标题显�?包车"而非"拼车"
     var displayTp = (tp==="pc" && needTruck && z===7) ? "truck" : tp;
-    document.getElementById("tl").textContent={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[displayTp]+" "+w+"【"+z+"区】";
+    document.getElementById("tl").textContent={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[displayTp]+" "+w+"�?+z+"区�?;
     document.getElementById("s2").textContent=tQty;
     document.getElementById("s3").textContent=tCBM.toFixed(3);
     document.getElementById("s4").textContent=Math.round(tKg);
@@ -527,7 +527,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
         // 如果自动转包车，显示车型和包车总价
         if(needTruck && z===7 && trkSize){
           tierDisplay=trkSize+"包车";
-          priceDisplay="-";  // 包车按整车计价，单件不显示
+          priceDisplay="-";  // 包车按整车计价，单件不显�?
         }
         var tr=document.createElement("tr");
         tr.innerHTML="<td>"+(i+1)+"</td><td class=n>"+ri.q+"</td><td class=n>"+ri.kg.toFixed(1)+"</td><td class=n>"+ri.L+"</td><td class=n>"+ri.W+"</td><td class=n>"+ri.H+"</td><td class=n>"+(ri.kg*ri.q).toFixed(1)+"</td><td class=n>"+ri.sum3+"</td><td class=n>"+cbm.toFixed(4)+"</td><td>"+tierDisplay+"</td><td class=n>"+priceDisplay+"</td>";
