@@ -184,7 +184,7 @@ tr:hover td{background:#f8f9ff}
       <div class="g"><label>总方数CBM</label><input type="number" id="tC" step=".001" placeholder="总体积CBM"></div>
     </div>
   </div>
-  <div class="tb">
+  <div class="tb" id="tbA">
     <span class="tbtn" id="tMix" style="display:none;">混载</span>
     <span class="tbtn on" id="tPc">拼车</span>
     <span class="tbtn" id="tGr">绿盒</span>
@@ -467,6 +467,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
           dJ=fp;
           var trkSel=document.getElementById("trk");
           trkSel.value=trkSize;
+          document.getElementById("tbA").style.display="none";
           st("truck");
           alert("三边和超过260cm，已自动切换为"+trkSize+"包车\n包车费用："+fp+" JPY");
         }else{
@@ -513,7 +514,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
   });
   document.getElementById("clrBtn").addEventListener("click",function(){
     var defTrk='<option value="2T">2T = 1500KG / 8CBM</option><option value="4T" selected>4T = 2500KG / 18CBM</option><option value="10T">10T = 10000KG / 30CBM</option>';
-    document.getElementById("wh").selectedIndex=0;document.getElementById("rt").value="";document.getElementById("sQ").value="1";document.getElementById("sK").value="";document.getElementById("sL").value="";document.getElementById("sW").value="";document.getElementById("sH").value="";document.getElementById("sT").value="";document.getElementById("txt").value="";document.getElementById("tQ").value="1";document.getElementById("tT").value="";document.getElementById("tC").value="";document.getElementById("trk").innerHTML=defTrk;document.getElementById("trk").disabled=false;document.getElementById("rs").className="c rs";document.getElementById("det").className="det";sw("multi");st("pc");upd();
+    document.getElementById("wh").selectedIndex=0;document.getElementById("rt").value="";document.getElementById("sQ").value="1";document.getElementById("sK").value="";document.getElementById("sL").value="";document.getElementById("sW").value="";document.getElementById("sH").value="";document.getElementById("sT").value="";document.getElementById("txt").value="";document.getElementById("tQ").value="1";document.getElementById("tT").value="";document.getElementById("tC").value="";document.getElementById("trk").innerHTML=defTrk;document.getElementById("trk").disabled=false;document.getElementById("rs").className="c rs";document.getElementById("det").className="det";document.getElementById("tbA").style.display="flex";sw("multi");st("pc");upd();
   });
 })();
 </script>
