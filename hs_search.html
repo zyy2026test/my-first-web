@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>日本HS编码 / 进口税率查询</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,'Microsoft YaHei',sans-serif;background:#f0f2f5;min-height:100vh;font-size:16px;color:#222}
+.wrap{max-width:880px;margin:0 auto;padding:18px 16px 50px}
+.hh{background:linear-gradient(135deg,#1a73e8,#0d47a1);color:#fff;padding:16px 20px;border-radius:10px;margin-bottom:14px}
+.hh h1{font-size:1.2rem;margin-bottom:3px}
+.hh p{font-size:.74rem;opacity:.85}
+.box{background:#fff;border-radius:12px;padding:18px;box-shadow:0 4px 16px rgba(0,0,0,.08);margin-bottom:14px}
+.search{display:flex;gap:10px;margin-bottom:10px}
+.search input{flex:1;border:1.5px solid #ddd;border-radius:8px;padding:11px 14px;font-size:1rem;outline:none}
+.search input:focus{border-color:#1a73e8}
+.search button{background:#1a73e8;color:#fff;border:none;border-radius:8px;padding:0 22px;font-size:.95rem;font-weight:600;cursor:pointer}
+.search button:hover{background:#1557b0}
+.hint{font-size:.78rem;color:#888;line-height:1.7}
+.hint b{color:#1a73e8}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.chip{background:#eef3ff;color:#1a73e8;border:1px solid #d6e4ff;border-radius:14px;padding:4px 12px;font-size:.76rem;cursor:pointer;user-select:none}
+.chip:hover{background:#d6e4ff}
+.meta{font-size:.78rem;color:#666;margin:6px 2px 12px}
+.loading{text-align:center;color:#888;padding:30px;font-size:.9rem}
+.list{display:flex;flex-direction:column;gap:8px}
+.item{border:1.5px solid #eee;border-radius:9px;padding:11px 14px;transition:all .15s;background:#fff}
+.item:hover{border-color:#1a73e8;box-shadow:0 2px 10px rgba(26,115,232,.12)}
+.item .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.item .hs{font-family:Consolas,monospace;font-size:1.05rem;font-weight:700;color:#1a73e8}
+.item .rate{margin-left:auto;font-size:.92rem;font-weight:700;padding:2px 10px;border-radius:6px}
+.rate.free{background:#e6f4ea;color:#1e7a34}
+.rate.paid{background:#fdecea;color:#c62828}
+.rate.na{background:#f1f3f4;color:#888}
+.item .name{font-size:.92rem;margin-top:4px;line-height:1.5}
+.item .ch{font-size:.72rem;color:#999;margin-top:3px}
+.item .lnk{font-size:.72rem;color:#1a73e8;text-decoration:none;margin-left:8px}
+.item .lnk:hover{text-decoration:underline}
+.empty{text-align:center;color:#999;padding:30px;font-size:.9rem}
+.back{display:inline-block;margin-bottom:12px;color:#1a73e8;text-decoration:none;font-size:.85rem}
+.back:hover{text-decoration:underline}
+.note{font-size:.72rem;color:#999;margin-top:14px;line-height:1.8;border-top:1px solid #eee;padding-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← 返回固税运费计算器</a>
+  <div class="hh">
+    <h1>日本 HS 编码 / 进口税率查询</h1>
+    <p>输入品名（中文或日文）或 HS 编码，查询日本海关进口关税率（2026年7月9日版）</p>
+  </div>
+
+  <div class="box">
+    <div class="search">
+      <input id="q" type="text" placeholder="例如：棉制服装 / 自動車 / 塑料 / 6101" autofocus>
+      <button id="go">查询</button>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="hint">
+      支持：<b>中文品名</b>（已内置中日品名词典桥接）、<b>日文品名</b>、<b>HS 编码</b>（如 <b>6101</b> 查整章，<b>6101.20</b> 查细分）。
+      税率为日本「基本税率（General）」，最终结果以日本海关官网为准。
+    </div>
+  </div>
+
+  <div class="meta" id="meta"></div>
+  <div id="result"></div>
+
+  <div class="note">
+    数据来源：日本税関 実行関税率表（2026年7月9日版）<br>
+    <a href="https://www.customs.go.jp/tariff/2026_07_09/index.htm" target="_blank" rel="noopener">https://www.customs.go.jp/tariff/2026_07_09/index.htm</a><br>
+    本工具仅作参考，实际进口税率、消费税（10%）及各类协定税率请以官方公告为准。
+  </div>
+</div>
+
+<script>
+// ---- 中日品名词典桥接 (中文 -> 日文搜索词) ----
+var PHRASE = {
+  "棉":"綿","棉花":"綿花","麻":"麻","丝":"絹","丝绸":"絹","羊毛":"羊毛",
+  "化纤":"化学繊維","人造纤维":"人造繊維","合成纤维":"合成繊維","涤纶":"ポリエステル","尼龙":"ナイロン",
+  "服装":"衣類","衣服":"衣類","衣物":"衣類","衬衫":"シャツ","裤子":"ズボン","外套":"コート","西装":"スーツ",
+  "鞋":"靴","帽":"帽子","袜":"靴下","手套":"手袋",
+  "汽车":"自動車","轿车":"乗用自動車","卡车":"貨物自動車","客车":"バス","摩托车":"自動二輪車","自行车":"自転車","电动车":"電動",
+  "发动机":"エンジン","引擎":"エンジン","轮胎":"タイヤ",
+  "塑料":"プラスチック","塑胶":"プラスチック","树脂":"樹脂","橡胶":"ゴム",
+  "钢铁":"鉄鋼","铁":"鉄","钢":"鋼","不锈钢":"ステンレス","铝":"アルミニウム","铜":"銅","金属":"金属",
+  "机械":"機械","机器":"機械","设备":"装置","电机":"モーター","电子":"電子","电器":"電気機器",
+  "电脑":"コンピュータ","计算机":"コンピュータ","手机":"携帯電話","电话":"電話","电视":"テレビ",
+  "相机":"カメラ","音响":"音響","电池":"電池","充电器":"充電器","灯具":"照明","半导体":"半導体","芯片":"チップ",
+  "家具":"家具","玩具":"玩具","文具":"文房具","纸":"紙","木材":"木材","木":"木",
+  "陶瓷":"陶磁器","玻璃":"ガラス","石材":"石材","水泥":"セメント",
+  "化工":"化学","化学品":"化学品","肥料":"肥料","农药":"農薬","涂料":"塗料","油漆":"塗料","染料":"染料",
+  "药品":"医薬品","药":"薬","保健品":"サプリ","化妆品":"化粧品",
+  "食品":"食品","饮料":"飲料","酒":"酒","茶":"茶","咖啡":"コーヒー","糖":"糖","米":"米","面":"小麦","谷物":"穀物",
+  "油":"油","蔬菜":"野菜","水果":"果実","坚果":"ナット","鱼":"魚","肉":"肉","海鲜":"水産","乳制品":"乳製品","蛋":"卵",
+  "皮革":"革","皮具":"革製品","箱包":"鞄","包":"鞄","纺织品":"繊維","布料":"織物","工具":"工具","五金":"金物",
+  "轴承":"軸受","螺丝":"ねじ","螺栓":"ボルト","阀门":"バルブ","泵":"ポンプ","传感器":"センサ",
+  "建材":"建材","地毯":"絨毯","寝具":"寝具","餐具":"食器","婴儿":"ベビー","宠物":"ペット","运动":"スポーツ","户外":"アウトドア"
+};
+// 简体->日本汉字 单字映射 (兜底)
+var CHARMAP = {
+  "棉":"綿","铁":"鉄","钢":"鋼","银":"銀","铜":"銅","纤":"繊","织":"織","维":"維","机":"機","电":"電",
+  "术":"術","疗":"療","东":"東","车":"車","国":"國","实":"實","执":"執","货":"貨","备":"備","质":"質",
+  "张":"張","长":"長","门":"門","开":"開","关":"關","单":"單","卖":"売","买":"買","总":"總","类":"類",
+  "纸":"紙","鱼":"魚","鸟":"鳥","马":"馬","验":"験","证":"証","书":"書","业":"業","务":"務","园":"園",
+  "图":"圖","团":"團","种":"種","称":"稱","处":"處","过":"過","达":"達","缩":"縮","组":"組","纤":"纖",
+  "饮":"飲","馆":"館","虾":"蝦","蚕":"蠶","润":"潤","圣":"聖","胜":"勝","称":"稱","肃":"肅","显":"顯",
+  "网":"網","脏":"臓","脑":"脳","华":"華","画":"画","会":"會","汇":"匯","丰":"豊","冲":"沖","虫":"蟲"
+};
+var SUG = ["棉制服装","塑料","汽车","鞋","家具","钢铁","电子产品","食品","化妆品","玩具","陶瓷","木材"];
+
+var DATA=null, DATA_URL="tariff.json", TARIFF_BASE="https://www.customs.go.jp/tariff/2026_07_09/data/";
+
+function expand(q){
+  var terms=[q];
+  for(var k in PHRASE){ if(PHRASE.hasOwnProperty(k) && q.indexOf(k)>=0) terms.push(PHRASE[k]); }
+  var v=q;
+  for(var c in CHARMAP){ if(CHARMAP.hasOwnProperty(c)) v=v.split(c).join(CHARMAP[c]); }
+  if(v!==q) terms.push(v);
+  // dedupe
+  var seen={},out=[];
+  for(var i=0;i<terms.length;i++){ var t=terms[i].trim(); if(t && !seen[t]){seen[t]=1;out.push(t);} }
+  return out;
+}
+
+function isHs(q){ return /^[0-9.]+$/.test(q.replace(/\s/g,'')); }
+
+function search(q){
+  q=q.trim();
+  if(!q || !DATA) return [];
+  var items=DATA.items, res=[];
+  if(isHs(q)){
+    var pat=q.replace(/\s/g,'');
+    for(var i=0;i<items.length;i++){
+      var it=items[i];
+      if(it.hs.indexOf(pat)===0 || it.hs.indexOf(pat)>=0){ res.push({it:it,score: it.hs.indexOf(pat)===0?100:50}); }
+    }
+  } else {
+    var terms=expand(q);
+    for(var i=0;i<items.length;i++){
+      var it=items[i], sc=0;
+      for(var t=0;t<terms.length;t++){
+        if(it.name.indexOf(terms[t])>=0) sc += (terms[t].length>=2?2:1);
+      }
+      if(sc>0) res.push({it:it,score:sc});
+    }
+  }
+  res.sort(function(a,b){ return b.score-a.score || (a.it.hs<b.it.hs?-1:1); });
+  return res.slice(0,150);
+}
+
+function rateClass(r){
+  if(!r) return "na";
+  if(r.indexOf("無税")>=0) return "free";
+  if(r.indexOf("%")>=0) return "paid";
+  return "na";
+}
+function rateText(r){ return r? r : "—"; }
+
+function render(res){
+  var box=document.getElementById("result");
+  var meta=document.getElementById("meta");
+  if(!res.length){ box.innerHTML='<div class="empty">未找到匹配项，请尝试更通用的品名或 HS 编码。</div>'; meta.textContent=""; return; }
+  meta.textContent="共找到 "+res.length+(res.length>=150?"+":"")+" 条结果（按相关度排序，最多显示 150 条）";
+  var html='<div class="list">';
+  for(var i=0;i<res.length;i++){
+    var it=res[i].it;
+    var ch=it.ch||"";
+    var chNo=(it.hs.match(/^\d+/)||[""])[0];
+    var link=TARIFF_BASE+"j_"+chNo+".htm";
+    html+='<div class="item">'
+        +'<div class="top"><span class="hs">'+it.hs+'</span>'
+        +'<span class="rate '+rateClass(it.rate)+'">'+rateText(it.rate)+'</span></div>'
+        +'<div class="name">'+it.name+'</div>'
+        +'<div class="ch">'+ch+'<a class="lnk" href="'+link+'" target="_blank" rel="noopener">官网查看 ↗</a></div>'
+        +'</div>';
+  }
+  html+='</div>';
+  box.innerHTML=html;
+}
+
+function doSearch(){
+  var q=document.getElementById("q").value;
+  if(!DATA){ render([]); return; }
+  render(search(q));
+}
+
+function initChips(){
+  var c=document.getElementById("chips");
+  var h="";
+  for(var i=0;i<SUG.length;i++){ h+='<span class="chip" data-q="'+SUG[i]+'">'+SUG[i]+'</span>'; }
+  c.innerHTML=h;
+  c.addEventListener("click",function(e){
+    if(e.target && e.target.className==="chip"){
+      document.getElementById("q").value=e.target.getAttribute("data-q");
+      doSearch();
+      window.scrollTo({top:document.getElementById("result").offsetTop-20,behavior:"smooth"});
+    }
+  });
+}
+
+function loadData(){
+  var meta=document.getElementById("meta");
+  meta.textContent="正在加载关税数据库…";
+  var xhr=new XMLHttpRequest();
+  xhr.open("GET",DATA_URL,true);
+  xhr.onreadystatechange=function(){
+    if(xhr.readyState===4){
+      if(xhr.status===200 && xhr.responseText){
+        try{
+          DATA=JSON.parse(xhr.responseText);
+          meta.textContent="关税库已加载："+DATA.count+" 条（更新 "+DATA.updated+"）";
+          if(document.getElementById("q").value) doSearch();
+        }catch(e){ meta.textContent="数据解析失败："+e.message; }
+      }else{
+        meta.textContent="关税数据加载失败（请确认 tariff.json 与本页在同一目录）。";
+      }
+    }
+  };
+  xhr.send();
+}
+
+document.getElementById("go").addEventListener("click",doSearch);
+document.getElementById("q").addEventListener("keydown",function(e){ if(e.key==="Enter") doSearch(); });
+initChips();
+loadData();
+</script>
+</body>
+</html>
