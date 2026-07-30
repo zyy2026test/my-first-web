@@ -194,9 +194,9 @@ tr:hover td{background:#f8f9ff}
   </div>
   <div class="dom" id="gnDetail">
     <div class="dc">
-      <div class="ci"><div class="v" id="gnWv">0</div><div class="l">库内作业费</div></div>
+      <div class="ci"><div class="v" id="gnWv" style="visibility:hidden">0</div><div class="l">库内作业费</div></div>
       <div class="ci"><div class="v" id="gnPv">0</div><div class="l">提货费</div></div>
-      <div class="ci"><div class="v" id="gnTv">0</div><div class="l">内陆转运费</div></div>
+      <div class="ci"><div class="v" id="gnTv" style="font-size:.78rem">-</div><div class="l">内陆转运城市</div></div>
       <div class="ci"><div class="v" id="gnSv">0</div><div class="l" style="font-weight:700;color:#c62828">国内段合计</div></div>
     </div>
   </div>
@@ -344,9 +344,9 @@ tr:hover td{background:#f8f9ff}
   <div class="gn" id="gnR">
     <div class="gt"><span>🏢</span> 国内段费用（CNY）</div>
     <div class="gr">
-      <div class="gi"><div class="gl">库内作业费</div><div class="gv" id="gnRWv">-</div><div class="gc" id="gnRWj">-</div></div>
+      <div class="gi"><div class="gl">库内作业费</div><div class="gv" id="gnRWv" style="visibility:hidden">-</div><div class="gc" id="gnRWj" style="visibility:hidden">-</div></div>
       <div class="gi"><div class="gl">提货费</div><div class="gv" id="gnRPv">-</div><div class="gc" id="gnRPj">-</div></div>
-      <div class="gi"><div class="gl">内陆转运费</div><div class="gv" id="gnRTv">-</div><div class="gc" id="gnRTj">-</div></div>
+      <div class="gi"><div class="gl">内陆转运城市</div><div class="gv" id="gnRTv" style="font-size:.82rem">-</div><div class="gc" id="gnRTj" style="visibility:hidden">-</div></div>
       <div class="gi"><div class="gl" style="font-weight:700;color:#c62828">国内段合计</div><div class="gv" style="color:#c62828" id="gnRSv">-</div><div class="gc" id="gnRSj">-</div></div>
     </div>
     <div class="gtot" id="gnGtot"><span class="lb">含国内段总计（20GP）</span><span class="v" id="gnT20">-</span></div>
@@ -531,7 +531,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
       if(sKg>0&&sL>0&&sW>0&&sH>0){var sq=parseInt(document.getElementById("sQ").value)||1;tCBM+=sL*sW*sH/1e6*sq;tKg+=sKg*sq;}
       var tKgT=parseFloat(document.getElementById("tT").value)||0;
       var tC=parseFloat(document.getElementById("tC").value)||0;
-      if(tKgT>0&&tC>0){tKg=tKgT;tCBM=tC;}
+      if(tC>0){tCBM=tC; if(tKgT>0){tKg=tKgT;} else {tKg=Math.round(tC*167*100)/100;}}
     }catch(e){}
     var wf=parseFloat(document.getElementById("gnW").value)||35;
     var gnWc=Math.round(wf*tCBM*100)/100;
@@ -543,9 +543,11 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     }
     var trR=parseFloat(document.getElementById("gnTr").value)||0;
     var gnTc=Math.round(trR*tKg*100)/100;
-    document.getElementById("gnWv").textContent=gnWc.toFixed(2)+" CNY";
+    var gnTrOpt=document.getElementById("gnTr");
+    var gnTrTxt=gnTrOpt.selectedIndex>=0?gnTrOpt.options[gnTrOpt.selectedIndex].text:"-";
+    if(gnTrTxt.indexOf("不转运")>=0) gnTrTxt="-";
+    document.getElementById("gnTv").textContent=gnTrTxt;
     document.getElementById("gnPv").textContent=gnPc.toFixed(2)+" CNY";
-    document.getElementById("gnTv").textContent=gnTc.toFixed(2)+" CNY";
     document.getElementById("gnSv").textContent=(gnWc+gnPc+gnTc).toFixed(2)+" CNY";
   }
   document.getElementById("gnW").addEventListener("change",gnPreview);
@@ -601,8 +603,8 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
       var q=parseInt(document.getElementById("tQ").value)||1;
       var tKg=parseFloat(document.getElementById("tT").value)||0;
       var inputCBM=parseFloat(document.getElementById("tC").value)||0;
-      if(!tKg){alert("请填写总重量");return}
       if(!inputCBM){alert("请填写总方数");return}
+      if(!tKg){tKg=Math.round(inputCBM*167*100)/100;}
       var perKg=tKg/q, perCBM=inputCBM/q;
       var estL=Math.round(Math.pow(perCBM*1e6,1/3)), estW=estL, estH=estL;
       rows.push({q:q,kg:perKg,L:estL,W:estW,H:estH,sum3:estL+estW+estH,inputCBM:inputCBM});
@@ -699,18 +701,20 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     var gnTotJPY=Math.round(gnTotCNY/r);
     var gnWJPY=Math.round(gnWc/r), gnPJPY=Math.round(gnPc/r), gnTJPY=Math.round(gnTc/r);
     // 更新国内段预览
-    document.getElementById("gnWv").textContent=gnWc.toFixed(2)+" CNY";
+    var gnTrOpt2=document.getElementById("gnTr");
+    var gnTrTxt2=gnTrOpt2.selectedIndex>=0?gnTrOpt2.options[gnTrOpt2.selectedIndex].text:"-";
+    if(gnTrTxt2.indexOf("不转运")>=0) gnTrTxt2="-";
+    document.getElementById("gnTv").textContent=gnTrTxt2;
     document.getElementById("gnPv").textContent=gnPc.toFixed(2)+" CNY";
-    document.getElementById("gnTv").textContent=gnTc.toFixed(2)+" CNY";
     document.getElementById("gnSv").textContent=gnTotCNY.toFixed(2)+" CNY";
     // 更新国内段结果区
     var gns=document.querySelectorAll("#gnR .gn");
-    document.getElementById("gnRWv").textContent=gnWc.toFixed(2)+" CNY";
-    document.getElementById("gnRWj").textContent=fm(gnWJPY);
+    var gnTrOpt3=document.getElementById("gnTr");
+    var gnTrTxt3=gnTrOpt3.selectedIndex>=0?gnTrOpt3.options[gnTrOpt3.selectedIndex].text:"-";
+    if(gnTrTxt3.indexOf("不转运")>=0) gnTrTxt3="-";
+    document.getElementById("gnRTv").textContent=gnTrTxt3;
     document.getElementById("gnRPv").textContent=gnPc.toFixed(2)+" CNY";
     document.getElementById("gnRPj").textContent=fm(gnPJPY);
-    document.getElementById("gnRTv").textContent=gnTc.toFixed(2)+" CNY";
-    document.getElementById("gnRTj").textContent=fm(gnTJPY);
     document.getElementById("gnRSv").textContent=gnTotCNY.toFixed(2)+" CNY";
     document.getElementById("gnRSj").textContent=fm(gnTotJPY);
     var t20Tot=ab20+(d20||0)+gnTotJPY;
@@ -791,14 +795,11 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     document.getElementById("gnDetail").className="dom";
     document.getElementById("gnWv").textContent="0 CNY";
     document.getElementById("gnPv").textContent="0 CNY";
-    document.getElementById("gnTv").textContent="0 CNY";
+    document.getElementById("gnTv").textContent="-";
     document.getElementById("gnSv").textContent="0 CNY";
-    document.getElementById("gnRWv").textContent="-";
-    document.getElementById("gnRWj").textContent="-";
     document.getElementById("gnRPv").textContent="-";
     document.getElementById("gnRPj").textContent="-";
     document.getElementById("gnRTv").textContent="-";
-    document.getElementById("gnRTj").textContent="-";
     document.getElementById("gnRSv").textContent="-";
     document.getElementById("gnRSj").textContent="-";
     document.getElementById("gnT20").textContent="-";
