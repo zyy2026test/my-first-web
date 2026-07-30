@@ -159,6 +159,49 @@ tr:hover td{background:#f8f9ff}
     <div class="hsNOTE" style="padding:8px 16px 12px;text-align:center">数据来源：日本税関 実行関税率表（2026年7月9日版）｜基本税率仅供参考，实际以官方公告为准</div>
   </div>
 </div>
+<div class="c2">
+  <div class="lb"><span class="em">🚛</span> 国内段（中国国内费用 · CNY）</div>
+  <div class="r">
+    <div class="g"><label>库内作业费</label>
+      <select id="gnW">
+        <option value="35">35元/方（默认）</option>
+      </select>
+    </div>
+    <div class="g"><label>提货方式</label>
+      <div style="display:flex;gap:4px;padding-top:1px">
+        <span class="mbtn2" id="gnPkSelf">我司提货</span>
+        <span class="mbtn2 on" id="gnPkCust">客户自送</span>
+      </div>
+    </div>
+    <div class="g"><label>内陆转运城市</label>
+      <select id="gnTr">
+        <option value="">- 不转运 -</option>
+        <option value="0.5">南通 0.5元/kg</option>
+        <option value="0.5">苏州 0.5元/kg</option>
+        <option value="0.5">义乌 0.5元/kg</option>
+        <option value="0.5">杭州 0.5元/kg</option>
+        <option value="0.7">宁波 0.7元/kg</option>
+        <option value="0.8">泉州 0.8元/kg</option>
+        <option value="0.8">福州 0.8元/kg</option>
+        <option value="0.9">武汉 0.9元/kg</option>
+        <option value="0.6">青岛 0.6元/kg</option>
+        <option value="0.4">大连 0.4元/kg</option>
+        <option value="0.9">郑州 0.9元/kg</option>
+        <option value="0.6">深圳 0.6元/kg</option>
+        <option value="0.8">广州 0.8元/kg</option>
+      </select>
+    </div>
+  </div>
+  <div class="dom" id="gnDetail">
+    <div class="dc">
+      <div class="ci"><div class="v" id="gnWv">0</div><div class="l">库内作业费</div></div>
+      <div class="ci"><div class="v" id="gnPv">0</div><div class="l">提货费</div></div>
+      <div class="ci"><div class="v" id="gnTv">0</div><div class="l">内陆转运费</div></div>
+      <div class="ci"><div class="v" id="gnSv">0</div><div class="l" style="font-weight:700;color:#c62828">国内段合计</div></div>
+    </div>
+  </div>
+</div>
+
 <div class="c">
   <div class="btn-row" style="align-items:flex-end;gap:10px">
     <button class="mbtn" id="bSng">单一尺寸</button>
@@ -295,48 +338,7 @@ tr:hover td{background:#f8f9ff}
   </div>
 </div>
 
-<div class="c2">
-  <div class="lb"><span class="em">🚛</span> 国内段（中国国内费用 · CNY）</div>
-  <div class="r">
-    <div class="g"><label>库内作业费</label>
-      <select id="gnW">
-        <option value="35">35元/方（默认）</option>
-      </select>
-    </div>
-    <div class="g"><label>提货方式</label>
-      <div style="display:flex;gap:4px;padding-top:1px">
-        <span class="mbtn2" id="gnPkSelf">我司提货</span>
-        <span class="mbtn2 on" id="gnPkCust">客户自送</span>
-      </div>
-    </div>
-    <div class="g"><label>内陆转运城市</label>
-      <select id="gnTr">
-        <option value="">- 不转运 -</option>
-        <option value="0.5">南通 0.5元/kg</option>
-        <option value="0.5">苏州 0.5元/kg</option>
-        <option value="0.5">义乌 0.5元/kg</option>
-        <option value="0.5">杭州 0.5元/kg</option>
-        <option value="0.7">宁波 0.7元/kg</option>
-        <option value="0.8">泉州 0.8元/kg</option>
-        <option value="0.8">福州 0.8元/kg</option>
-        <option value="0.9">武汉 0.9元/kg</option>
-        <option value="0.6">青岛 0.6元/kg</option>
-        <option value="0.4">大连 0.4元/kg</option>
-        <option value="0.9">郑州 0.9元/kg</option>
-        <option value="0.6">深圳 0.6元/kg</option>
-        <option value="0.8">广州 0.8元/kg</option>
-      </select>
-    </div>
-  </div>
-  <div class="dom" id="gnDetail">
-    <div class="dc">
-      <div class="ci"><div class="v" id="gnWv">0</div><div class="l">库内作业费</div></div>
-      <div class="ci"><div class="v" id="gnPv">0</div><div class="l">提货费</div></div>
-      <div class="ci"><div class="v" id="gnTv">0</div><div class="l">内陆转运费</div></div>
-      <div class="ci"><div class="v" id="gnSv">0</div><div class="l" style="font-weight:700;color:#c62828">国内段合计</div></div>
-    </div>
-  </div>
-</div>
+
 
 <div class="c rs" id="rs">
   <div class="gn" id="gnR">
