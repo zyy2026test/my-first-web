@@ -101,6 +101,37 @@ tr:hover td{background:#f8f9ff}
 #hsLOD{text-align:center;color:#999;padding:28px;font-size:.88rem}
 #hsERR{text-align:center;color:#c00;padding:20px;font-size:.88rem}
 .hsNOTE{font-size:.7rem;color:#bbb;margin-top:10px;line-height:1.7;border-top:1px solid #eee;padding-top:8px}
+/* 国内段 */
+.c2{background:#fff;border-radius:12px;padding:16px 20px;box-shadow:0 4px 16px rgba(0,0,0,.08);margin-bottom:14px}
+.c2 .lb{font-size:.8rem;font-weight:600;color:#333;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.c2 .lb .em{font-size:1rem}
+.c2 .r{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.c2 .r:last-child{margin-bottom:0}
+.c2 .g{flex:1;min-width:140px}
+.c2 .g label{font-size:.72rem;color:#666;font-weight:500;display:block;margin-bottom:3px}
+.c2 select,.c2 input{width:100%;padding:7px 8px;border:1.5px solid #ddd;border-radius:7px;font-size:.85rem;outline:none}
+.c2 select:focus,.c2 input:focus{border-color:#1a73e8}
+.c2 .mbtn2{background:#fff;border:1.5px solid #ccc;border-radius:7px;padding:7px 16px;font-size:.8rem;font-weight:600;color:#777;cursor:pointer;margin-right:5px;user-select:none}
+.c2 .mbtn2.on{background:#1a73e8;color:#fff;border-color:#1a73e8}
+.c2 .mbtn2:disabled{opacity:.5;cursor:default}
+.dom{display:none}.dom.sh{display:block}
+.dom .n{margin-top:2px;color:#999;font-size:.7rem}
+.dc{display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid #eee;padding-top:10px;margin-top:8px}
+.dc .ci{flex:1;min-width:100px;background:#f8f9fa;border-radius:7px;padding:6px 10px;text-align:center}
+.dc .ci .v{font-size:.85rem;font-weight:700;color:#1a73e8}
+.dc .ci .l{font-size:.65rem;color:#888;margin-top:1px}
+.dc .ci .cny{font-size:.68rem;color:#e53935;font-weight:600}
+/* 国内段结果区 */
+.gn{border-top:1px solid #eee;margin-top:12px;padding-top:12px}
+.gn .gt{font-size:.8rem;font-weight:600;color:#333;margin-bottom:6px;display:flex;align-items:center;gap:4px}
+.gn .gr{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.gn .gi{border:1px solid #eee;border-radius:7px;padding:6px 10px;text-align:center}
+.gn .gi .gl{font-size:.68rem;color:#888}
+.gn .gi .gv{font-size:.82rem;font-weight:700;color:#1a73e8}
+.gn .gi .gc{font-size:.65rem;color:#e53935}
+.gn .gtot{background:#f0f4ff;border-radius:7px;padding:8px 12px;margin-top:8px;display:flex;justify-content:space-between;align-items:center}
+.gn .gtot .lb{font-size:.82rem;font-weight:600;color:#333}
+.gn .gtot .v{font-size:.9rem;font-weight:800;color:#e53935}
 </style>
 </head>
 <body>
@@ -263,6 +294,50 @@ tr:hover td{background:#f8f9ff}
     <button class="b b2" id="clrBtn">重置</button>
   </div>
 </div>
+
+<div class="c2">
+  <div class="lb"><span class="em">🚛</span> 国内段（中国国内费用 · CNY）</div>
+  <div class="r">
+    <div class="g"><label>库内作业费</label>
+      <select id="gnW">
+        <option value="35">35元/方（默认）</option>
+      </select>
+    </div>
+    <div class="g"><label>提货方式</label>
+      <div style="display:flex;gap:4px;padding-top:1px">
+        <span class="mbtn2" id="gnPkSelf">我司提货</span>
+        <span class="mbtn2 on" id="gnPkCust">客户自送</span>
+      </div>
+    </div>
+    <div class="g"><label>内陆转运城市</label>
+      <select id="gnTr">
+        <option value="">- 不转运 -</option>
+        <option value="0.5">南通 0.5元/kg</option>
+        <option value="0.5">苏州 0.5元/kg</option>
+        <option value="0.5">义乌 0.5元/kg</option>
+        <option value="0.5">杭州 0.5元/kg</option>
+        <option value="0.7">宁波 0.7元/kg</option>
+        <option value="0.8">泉州 0.8元/kg</option>
+        <option value="0.8">福州 0.8元/kg</option>
+        <option value="0.9">武汉 0.9元/kg</option>
+        <option value="0.6">青岛 0.6元/kg</option>
+        <option value="0.4">大连 0.4元/kg</option>
+        <option value="0.9">郑州 0.9元/kg</option>
+        <option value="0.6">深圳 0.6元/kg</option>
+        <option value="0.8">广州 0.8元/kg</option>
+      </select>
+    </div>
+  </div>
+  <div class="dom" id="gnDetail">
+    <div class="dc">
+      <div class="ci"><div class="v" id="gnWv">0</div><div class="l">库内作业费</div></div>
+      <div class="ci"><div class="v" id="gnPv">0</div><div class="l">提货费</div></div>
+      <div class="ci"><div class="v" id="gnTv">0</div><div class="l">内陆转运费</div></div>
+      <div class="ci"><div class="v" id="gnSv">0</div><div class="l" style="font-weight:700;color:#c62828">国内段合计</div></div>
+    </div>
+  </div>
+</div>
+
 <div class="c rs" id="rs">
   <div class="rg">
     <div style="grid-column:1/-1;font-weight:600;font-size:.92rem;color:#1a73e8;margin-bottom:6px;text-align:center"><span id="tl">运费明细</span></div>
@@ -280,6 +355,17 @@ tr:hover td{background:#f8f9ff}
       <div class="dr fn"><div class="lb">合计</div><div class="vl" id="t40">-</div></div>
       <div class="dr up"><div class="lb">单价</div><div class="vl" id="up40">-</div></div>
     </div>
+  </div>
+  <div class="gn" id="gnR">
+    <div class="gt"><span>🏢</span> 国内段费用（CNY）</div>
+    <div class="gr">
+      <div class="gi"><div class="gl">库内作业费</div><div class="gv" id="gnRWv">-</div><div class="gc" id="gnRWj">-</div></div>
+      <div class="gi"><div class="gl">提货费</div><div class="gv" id="gnRPv">-</div><div class="gc" id="gnRPj">-</div></div>
+      <div class="gi"><div class="gl">内陆转运费</div><div class="gv" id="gnRTv">-</div><div class="gc" id="gnRTj">-</div></div>
+      <div class="gi"><div class="gl" style="font-weight:700;color:#c62828">国内段合计</div><div class="gv" style="color:#c62828" id="gnRSv">-</div><div class="gc" id="gnRSj">-</div></div>
+    </div>
+    <div class="gtot" id="gnGtot"><span class="lb">含国内段总计（20GP）</span><span class="v" id="gnT20">-</span></div>
+    <div class="gtot" id="gnGtot40" style="margin-top:4px"><span class="lb">含国内段总计（40HQ）</span><span class="v" id="gnT40">-</span></div>
   </div>
   <div class="det" id="det">
     <div class="det-t">明细</div>
@@ -414,6 +500,66 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     var w=document.getElementById("wh").value||document.getElementById("whManual").value.trim().toUpperCase();
     var z=Z[w]||0;if(z===7)return;st("truck");
   });
+
+  // ===== 国内段 提货方式 =====
+  var gnPk=false; // true=我司提货
+  document.getElementById("gnPkSelf").addEventListener("click",function(){
+    gnPk=true;
+    document.getElementById("gnPkSelf").className="mbtn2 on";
+    document.getElementById("gnPkCust").className="mbtn2";
+    gnPreview();
+  });
+  document.getElementById("gnPkCust").addEventListener("click",function(){
+    gnPk=false;
+    document.getElementById("gnPkSelf").className="mbtn2";
+    document.getElementById("gnPkCust").className="mbtn2 on";
+    gnPreview();
+  });
+  // 国内段实时预览
+  function gnPreview(){
+    var tCBM=0,tKg=0;
+    try {
+      var txt=document.getElementById("txt").value.trim();
+      if(txt){var ls=txt.split("\n");for(var i=0;i<ls.length;i++){var ps=ls[i].split(/[\s,]+/);if(ps.length>=4){var q=1,kg=parseFloat(ps[ps.length>=5?1:0]),L=parseFloat(ps[ps.length>=5?2:1]),W=parseFloat(ps[ps.length>=5?3:2]),H=parseFloat(ps[ps.length>=5?4:3]);if(ps.length>=5)q=parseFloat(ps[0]);if(!isNaN(q)&&!isNaN(kg)&&!isNaN(L)&&!isNaN(W)&&!isNaN(H)&&q>0&&kg>0&&L>0&&W>0&&H>0){tCBM+=L*W*H/1e6*q;tKg+=kg*q;}}}
+      }
+      var sKg=parseFloat(document.getElementById("sK").value)||0;
+      var sL=parseFloat(document.getElementById("sL").value)||0;
+      var sW=parseFloat(document.getElementById("sW").value)||0;
+      var sH=parseFloat(document.getElementById("sH").value)||0;
+      if(sKg>0&&sL>0&&sW>0&&sH>0){var sq=parseInt(document.getElementById("sQ").value)||1;tCBM+=sL*sW*sH/1e6*sq;tKg+=sKg*sq;}
+      var tKgT=parseFloat(document.getElementById("tT").value)||0;
+      var tC=parseFloat(document.getElementById("tC").value)||0;
+      if(tKgT>0&&tC>0){tKg=tKgT;tCBM=tC;}
+    }catch(e){}
+    var wf=parseFloat(document.getElementById("gnW").value)||35;
+    var gnWc=Math.round(wf*tCBM*100)/100;
+    var gnPc=0;
+    if(gnPk){
+      var byKg=0.3*tKg;
+      var byCBM=tCBM*167*0.3;
+      gnPc=Math.max(byKg,byCBM,150);
+    }
+    var trR=parseFloat(document.getElementById("gnTr").value)||0;
+    var gnTc=Math.round(trR*tKg*100)/100;
+    document.getElementById("gnWv").textContent=gnWc.toFixed(2)+" CNY";
+    document.getElementById("gnPv").textContent=gnPc.toFixed(2)+" CNY";
+    document.getElementById("gnTv").textContent=gnTc.toFixed(2)+" CNY";
+    document.getElementById("gnSv").textContent=(gnWc+gnPc+gnTc).toFixed(2)+" CNY";
+  }
+  document.getElementById("gnW").addEventListener("change",gnPreview);
+  document.getElementById("gnTr").addEventListener("change",gnPreview);
+  document.getElementById("txt").addEventListener("input",gnPreview);
+  document.getElementById("sK").addEventListener("input",gnPreview);
+  document.getElementById("sL").addEventListener("input",gnPreview);
+  document.getElementById("sW").addEventListener("input",gnPreview);
+  document.getElementById("sH").addEventListener("input",gnPreview);
+  document.getElementById("sQ").addEventListener("input",gnPreview);
+  document.getElementById("sT").addEventListener("input",gnPreview);
+  document.getElementById("tT").addEventListener("input",gnPreview);
+  document.getElementById("tC").addEventListener("input",gnPreview);
+  document.getElementById("tQ").addEventListener("input",gnPreview);
+  // ===== end 国内段 =====
+
   document.getElementById("wh").addEventListener("change",function(){
     var v=this.value;
     document.getElementById("whManual").value="";
@@ -536,6 +682,41 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
       }
       d20=Math.round(dJ);d40=d20;
     }
+    // ===== 国内段计算 =====
+    var gnWc=0,gnPc=0,gnTc=0;
+    var wf=parseFloat(document.getElementById("gnW").value)||35;
+    gnWc=wf*tCBM;
+    if(gnPk){
+      var byKg=0.3*tKg;
+      var byCBM=tCBM*167*0.3;
+      gnPc=Math.max(byKg,byCBM,150);
+    }
+    var trR=parseFloat(document.getElementById("gnTr").value)||0;
+    gnTc=trR*tKg;
+    var gnTotCNY=gnWc+gnPc+gnTc;
+    var gnTotJPY=Math.round(gnTotCNY/r);
+    var gnWJPY=Math.round(gnWc/r), gnPJPY=Math.round(gnPc/r), gnTJPY=Math.round(gnTc/r);
+    // 更新国内段预览
+    document.getElementById("gnWv").textContent=gnWc.toFixed(2)+" CNY";
+    document.getElementById("gnPv").textContent=gnPc.toFixed(2)+" CNY";
+    document.getElementById("gnTv").textContent=gnTc.toFixed(2)+" CNY";
+    document.getElementById("gnSv").textContent=gnTotCNY.toFixed(2)+" CNY";
+    // 更新国内段结果区
+    var gns=document.querySelectorAll("#gnR .gn");
+    document.getElementById("gnRWv").textContent=gnWc.toFixed(2)+" CNY";
+    document.getElementById("gnRWj").textContent=fm(gnWJPY);
+    document.getElementById("gnRPv").textContent=gnPc.toFixed(2)+" CNY";
+    document.getElementById("gnRPj").textContent=fm(gnPJPY);
+    document.getElementById("gnRTv").textContent=gnTc.toFixed(2)+" CNY";
+    document.getElementById("gnRTj").textContent=fm(gnTJPY);
+    document.getElementById("gnRSv").textContent=gnTotCNY.toFixed(2)+" CNY";
+    document.getElementById("gnRSj").textContent=fm(gnTotJPY);
+    var t20Tot=ab20+(d20||0)+gnTotJPY;
+    var t40Tot=ab40+(d40||0)+gnTotJPY;
+    document.getElementById("gnT20").textContent=fm(t20Tot)+" (CNY "+Math.round(t20Tot*r).toLocaleString()+")";
+    document.getElementById("gnT40").textContent=fm(t40Tot)+" (CNY "+Math.round(t40Tot*r).toLocaleString()+")";
+    document.getElementById("gnDetail").className="dom sh";
+    // ===== end 国内段 =====
     document.getElementById("ab20").textContent=fm(ab20);
     document.getElementById("d20").textContent=fm(d20);
     document.getElementById("t20").textContent=fm(ab20+d20);
@@ -599,6 +780,27 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
   document.getElementById("clrBtn").addEventListener("click",function(){
     var defTrk='<option value="2T">2T = 1500KG / 8CBM</option><option value="4T" selected>4T = 2500KG / 18CBM</option><option value="10T">10T = 10000KG / 30CBM</option>';
     document.getElementById("wh").selectedIndex=0;document.getElementById("rt").value="";document.getElementById("sQ").value="1";document.getElementById("sK").value="";document.getElementById("sL").value="";document.getElementById("sW").value="";document.getElementById("sH").value="";document.getElementById("sT").value="";document.getElementById("txt").value="";document.getElementById("tQ").value="1";document.getElementById("tT").value="";document.getElementById("tC").value="";document.getElementById("trk").innerHTML=defTrk;document.getElementById("trk").disabled=false;document.getElementById("rs").className="c rs";document.getElementById("det").className="det";document.getElementById("tbA").style.display="flex";sw("multi");st("pc");upd();
+    // 国内段重置
+    gnPk=false;
+    document.getElementById("gnPkSelf").className="mbtn2";
+    document.getElementById("gnPkCust").className="mbtn2 on";
+    document.getElementById("gnW").value="35";
+    document.getElementById("gnTr").value="";
+    document.getElementById("gnDetail").className="dom";
+    document.getElementById("gnWv").textContent="0 CNY";
+    document.getElementById("gnPv").textContent="0 CNY";
+    document.getElementById("gnTv").textContent="0 CNY";
+    document.getElementById("gnSv").textContent="0 CNY";
+    document.getElementById("gnRWv").textContent="-";
+    document.getElementById("gnRWj").textContent="-";
+    document.getElementById("gnRPv").textContent="-";
+    document.getElementById("gnRPj").textContent="-";
+    document.getElementById("gnRTv").textContent="-";
+    document.getElementById("gnRTj").textContent="-";
+    document.getElementById("gnRSv").textContent="-";
+    document.getElementById("gnRSj").textContent="-";
+    document.getElementById("gnT20").textContent="-";
+    document.getElementById("gnT40").textContent="-";
   });
 })();
 </script>
