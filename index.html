@@ -66,6 +66,41 @@ tr:hover td{background:#f8f9ff}
 .hsbtn{display:inline-flex;align-items:center;gap:6px;background:#fff;color:#1a73e8;border:2px solid #1a73e8;border-radius:8px;padding:9px 18px;font-size:.88rem;font-weight:700;cursor:pointer;margin:0 0 14px 0;text-decoration:none;transition:all .2s}
 .hsbtn:hover{background:#1a73e8;color:#fff}
 .hsbtn .em{font-size:1rem}
+#hsModal{display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center}
+#hsModal.open{display:flex}
+#hsOL{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+#hsBX{position:relative;background:#fff;border-radius:14px;width:94vw;max-width:820px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+#hsCL{position:absolute;top:12px;right:14px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#999;z-index:1;line-height:1}
+#hsCL:hover{color:#333}
+#hsHDR{background:linear-gradient(135deg,#1a73e8,#0d47a1);color:#fff;padding:14px 20px}
+#hsHDR h2{font-size:1rem;margin-bottom:2px}
+#hsHDR p{font-size:.72rem;opacity:.85}
+#hsBD{padding:14px 16px;overflow-y:auto;flex:1}
+#hsSCH{display:flex;gap:8px;margin-bottom:10px}
+#hsSCH input{flex:1;border:1.5px solid #ddd;border-radius:8px;padding:9px 12px;font-size:.9rem;outline:none}
+#hsSCH input:focus{border-color:#1a73e8}
+#hsGO{background:#1a73e8;color:#fff;border:none;border-radius:8px;padding:0 18px;font-size:.88rem;font-weight:600;cursor:pointer;white-space:nowrap}
+#hsGO:hover{background:#1557b0}
+#hsCHIPS{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+.chp{background:#eef3ff;color:#1a73e8;border:1px solid #d6e4ff;border-radius:14px;padding:3px 10px;font-size:.73rem;cursor:pointer;user-select:none}
+.chp:hover{background:#d6e4ff}
+#hsMETA{font-size:.75rem;color:#888;margin:4px 2px 10px}
+.hsLIST{display:flex;flex-direction:column;gap:7px}
+.hsIT{border:1.5px solid #eee;border-radius:8px;padding:10px 13px;background:#fff}
+.hsIT:hover{border-color:#1a73e8}
+.hsIT .rl{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.hsIT .hs{font-family:Consolas,monospace;font-size:1rem;font-weight:700;color:#1a73e8}
+.hsIT .rt{margin-left:auto;font-size:.88rem;font-weight:700;padding:2px 9px;border-radius:5px}
+.rtOK{background:#e6f4ea;color:#1e7a34}
+.rtNO{background:#fdecea;color:#c62828}
+.rtNA{background:#f1f3f4;color:#888}
+.hsIT .nm{font-size:.88rem;margin-top:4px;line-height:1.5}
+.hsIT .ln{font-size:.72rem;color:#1a73e8;text-decoration:none;margin-top:3px;display:block}
+.hsIT .ln:hover{text-decoration:underline}
+#hsEMP{text-align:center;color:#bbb;padding:28px;font-size:.88rem}
+#hsLOD{text-align:center;color:#999;padding:28px;font-size:.88rem}
+#hsERR{text-align:center;color:#c00;padding:20px;font-size:.88rem}
+.hsNOTE{font-size:.7rem;color:#bbb;margin-top:10px;line-height:1.7;border-top:1px solid #eee;padding-top:8px}
 </style>
 </head>
 <body>
@@ -74,7 +109,25 @@ tr:hover td{background:#f8f9ff}
   <h1>固税运费计算器</h1>
   <p>单件/批量 × 拼车/绿盒/包车 × 20GP/40HQ | 汇率默认 0.048</p>
 </div>
-<a class="hsbtn" href="hs_search.html" target="_blank" rel="noopener"><span class="em">🔍</span> 品名 → 日本HS编码/税率查询</a>
+<button class="hsbtn" id="hsOBtn"><span class="em">🔍</span> 品名 → 日本HS编码/税率查询</button>
+<div id="hsModal">
+  <div id="hsOL"></div>
+  <div id="hsBX">
+    <button id="hsCL" title="关闭">✕</button>
+    <div id="hsHDR">
+      <h2>日本 HS 编码 / 进口税率查询</h2>
+      <p>输入品名（中文/日文）或 HS 编码搜索 | 2026年7月9日版</p>
+    </div>
+    <div id="hsBD">
+      <div id="hsSCH"><input id="hsQ" type="text" placeholder="例如：棉制服装 / 自動車 / 塑料 / 6101">
+        <button id="hsGO">查询</button></div>
+      <div id="hsCHIPS"></div>
+      <div id="hsMETA"></div>
+      <div id="hsRES"></div>
+    </div>
+    <div class="hsNOTE" style="padding:8px 16px 12px;text-align:center">数据来源：日本税関 実行関税率表（2026年7月9日版）｜基本税率仅供参考，实际以官方公告为准</div>
+  </div>
+</div>
 <div class="c">
   <div class="btn-row" style="align-items:flex-end;gap:10px">
     <button class="mbtn" id="bSng">单一尺寸</button>
@@ -247,6 +300,9 @@ tr:hover td{background:#f8f9ff}
 </div>
 </div>
 <script>
+// 中日品名词典 + 简体→日本汉字映射（HS税率查询弹窗用）
+var PHRASE={"棉":"綿","棉花":"綿花","麻":"麻","丝":"絹","丝绸":"絹","羊毛":"羊毛","化纤":"化学繊維","人造纤维":"人造繊維","合成纤维":"合成繊維","涤纶":"ポリエステル","尼龙":"ナイロン","服装":"衣類","衣服":"衣類","衣物":"衣類","衬衫":"シャツ","裤子":"ズボン","外套":"コート","西装":"スーツ","鞋":"靴","帽":"帽子","袜":"靴下","手套":"手袋","汽车":"自動車","轿车":"乗用自動車","卡车":"貨物自動車","客车":"バス","摩托车":"自動二輪車","自行车":"自転車","电动车":"電動","发动机":"エンジン","轮胎":"タイヤ","塑料":"プラスチック","塑胶":"プラスチック","树脂":"樹脂","橡胶":"ゴム","钢铁":"鉄鋼","铁":"鉄","钢":"鋼","不锈钢":"ステンレス","铝":"アルミニウム","铜":"銅","金属":"金属","机械":"機械","机器":"機械","设备":"装置","电机":"モーター","电子":"電子","电器":"電気機器","电脑":"コンピュータ","计算机":"コンピュータ","手机":"携帯電話","电话":"電話","电视":"テレビ","相机":"カメラ","音响":"音響","电池":"電池","充电器":"充電器","灯具":"照明","半导体":"半導体","芯片":"チップ","家具":"家具","玩具":"玩具","文具":"文房具","纸":"紙","木材":"木材","木":"木","陶瓷":"陶磁器","玻璃":"ガラス","石材":"石材","水泥":"セメント","化工":"化学","化学品":"化学品","肥料":"肥料","农药":"農薬","涂料":"塗料","油漆":"涂料","染料":"染料","药品":"医薬品","药":"薬","保健品":"サプリ","化妆品":"化妆品","食品":"食品","饮料":"飲料","酒":"酒","茶":"茶","咖啡":"コーヒー","糖":"糖","米":"米","谷物":"穀物","油":"油","蔬菜":"野菜","水果":"果実","坚果":"ナッツ","鱼":"魚","肉":"肉","海鲜":"水産","乳制品":"乳製品","蛋":"卵","皮革":"革","皮具":"革製品","箱包":"鞄","包":"鞄","纺织品":"繊維","布料":"織物","工具":"工具","五金":"金物","轴承":"軸受","螺丝":"ねじ","螺栓":"ボルト","阀门":"バルブ","泵":"ポンプ","传感器":"センサ","建材":"建材","地毯":"絨毯","寝具":"寝具","餐具":"食器","婴儿":"ベビー","宠物":"ペット","运动":"スポーツ","户外":"アウトドア"};
+var CHARMAP={"棉":"綿","铁":"鉄","钢":"鋼","银":"銀","铜":"銅","纤":"繊","织":"織","维":"維","机":"機","电":"電","术":"術","疗":"療","东":"東","车":"車","国":"國","实":"実","执":"執","货":"貨","备":"備","质":"質","张":"張","长":"長","门":"門","开":"開","关":"関","单":"単","卖":"売","买":"買","总":"総","类":"類","纸":"紙","鱼":"魚","鸟":"鳥","马":"馬","验":"験","证":"証","书":"書","业":"業","务":"務","园":"園","图":"圖","团":"團","种":"種","称":"称","处":"処","过":"過","达":"達","缩":"縮","组":"組","饮":"飲","馆":"館","虾":"蝦","蚕":"蠶","润":"潤","圣":"聖","胜":"勝","肃":"肅","显":"顕","网":"網","脏":"臓","脑":"脳","华":"華","会":"會","汇":"匯","丰":"豊","冲":"沖","虫":"蟲"};
 (function(){
   var Z={NRT1:1,NRT2:1,TPF6:1,HND9:1,HND3:2,HND2:2,NRT5:2,TPF2:2,TYO1:2,TYO2:2,TYO3:2,TPFA:2,VJVN:2,HND8:3,TPFB:3,FSZ1:3,HFY1:3,HFY2:3,TYO4:3,TPB5:3,TYO6:3,TYO7:3,TYO8:3,TYO9:3,TPX2:3,TPFC:3,TPB9:3,TPFG:3,TPFB:3,TPB2:3,TPB7:3,TPB1:3,TPF9:3,VJNA:3,VJND:3,VJNE:3,HND6:3,XHD1:3,XHD2:3,XHD3:3,QCB1:3,QCB2:3,QCB3:3,QCB4:3,QCB5:3,TPY3:3,VJNJ:3,VJU1:3,XJE1:3,XJE2:3,TPZ1:3,TPZ3:3,TPZ4:3,VGJT:3,谷仓:3,箕面仓:3,千叶市花见川:3,千叶县流山市:3,千叶县稻毛区六方町:3,NGO2:4,TPB8:4,TPF4:4,TPN2:4,NGO3:4,KIX1:5,KIX2:5,KIX3:5,KIX4:5,KIX5:5,KIX6:5,TPF3:5,TPFD:5,VJNB:5,VJNC:5,TPN3:5,VJWB:5,XKX3:5,XKX4:5,TPB3:5,TPB6:5,TPN1:5,TPFI:5,XJW1:5,QCB3:5,QCB4:5,QCB5:5,HSG1:6,HSR1:6,JCL天户町:7,乐天流山:7,JCL箕面:7,谷仓上尾:7,JCL六方町:7};
   var RP={1:{140:520,160:620,180:870},2:{140:540,160:640,180:890},3:{140:560,160:660,180:920},4:{140:620,160:770,180:920},5:{140:720,160:870,180:1070},6:{140:1240,160:1470,180:1800}};
@@ -516,6 +572,30 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     document.getElementById("rs").className="c rs sh";
     document.getElementById("rs").scrollIntoView({behavior:"smooth",block:"start"});
   });
+
+  // ===== HS Search Modal =====
+  var HS=null;
+  function hsExpand(q){var t=[q];for(var k in PHRASE)if(PHRASE.hasOwnProperty(k)&&q.indexOf(k)>=0)t.push(PHRASE[k]);var v=q;for(var c in CHARMAP)v=v.split(c).join(CHARMAP[c]);if(v!==q)t.push(v);var s={},u=[];for(var i=0;i<t.length;i++){var x=t[i].trim();if(x&&!s[x]){s[x]=1;u.push(x);}}return u;}
+  function hsSearch(q){if(!HS||!q)return[];q=q.trim();var res=[];if(/^[0-9.]+$/.test(q.replace(/\s/g,''))){var pat=q.replace(/\s/g,'');for(var i=0;i<HS.length;i++){var it=HS[i];if(it.hs.startsWith(pat))res.push({it:it,sc:100});else if(it.hs.indexOf(pat)>=0)res.push({it:it,sc:50});}}else{var ts=hsExpand(q);for(var i=0;i<HS.length;i++){var it=HS[i],sc=0;for(var j=0;j<ts.length;j++)if(it.name.indexOf(ts[j])>=0)sc+=(ts[j].length>=2?2:1);if(sc>0)res.push({it:it,sc:sc});}}res.sort(function(a,b){return b.sc-a.sc||(a.it.hs<b.it.hs?-1:1);});return res.slice(0,120);}
+  function hsRate(r){if(!r)return{cls:"rtNA",txt:"—"};if(r.indexOf("無税")>=0)return{cls:"rtOK",txt:"無税"};if(r.indexOf("%")>=0)return{cls:"rtNO",txt:r};return{cls:"rtNA",txt:r||"—"};}
+  function hsRender(res,loaded){var el=document.getElementById("hsRES"),meta=document.getElementById("hsMETA");if(!loaded){el.innerHTML='<div id="hsLOD">正在加载关税数据库…</div>';meta.textContent="";return;}if(!res.length){el.innerHTML='<div id="hsEMP">未找到匹配项，请尝试更通用的品名。</div>';meta.textContent="";return;}meta.textContent="共找到 "+res.length+(res.length>=120?"+":"")+" 条（按相关度排序，最多 120 条）";var html='<div class="hsLIST">';for(var i=0;i<res.length;i++){var it=res[i].it,r=hsRate(it.rate),ln="https://www.customs.go.jp/tariff/2026_07_09/data/j_"+((it.hs.match(/^\d+/)||[""])[0])+".htm";html+='<div class="hsIT"><div class="rl"><span class="hs">'+it.hs+'</span><span class="rt '+r.cls+'">'+r.txt+'</span></div><div class="nm">'+it.name+'</div><a class="ln" href="'+ln+'" target="_blank" rel="noopener">官网查看 ↗</a></div>';}el.innerHTML=html+"</div>";}
+  function hsOpen(){document.getElementById("hsModal").classList.add("open");document.getElementById("hsQ").focus();if(HS){hsRender([],true);document.getElementById("hsQ").value="";}else{hsaLoad();}}
+  function hsClose(){document.getElementById("hsModal").classList.remove("open");}
+  function hsaLoad(){hsRender([],false);var x=new XMLHttpRequest();x.open("GET","tariff.json",true);x.onreadystatechange=function(){if(x.readyState===4&&x.status===200){try{HS=JSON.parse(x.responseText).items;hsRender([],true);document.getElementById("hsMETA").textContent="关税库已加载："+HS.length+" 条";}catch(e){document.getElementById("hsRES").innerHTML='<div id="hsERR">数据解析失败</div>';}}};x.send();}
+  document.getElementById("hsOBtn").addEventListener("click",hsOpen);
+  document.getElementById("hsCL").addEventListener("click",hsClose);
+  document.getElementById("hsOL").addEventListener("click",hsClose);
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")hsClose();});
+  document.getElementById("hsGO").addEventListener("click",function(){hsRender(hsSearch(document.getElementById("hsQ").value),true);});
+  document.getElementById("hsQ").addEventListener("keydown",function(e){if(e.key==="Enter")hsRender(hsSearch(document.getElementById("hsQ").value),true);});
+  (function hsChips(){
+    var c=["棉制服装","塑料","汽车","鞋","家具","钢铁","电子产品","食品","化妆品","玩具"],html="";
+    for(var i=0;i<c.length;i++)html+='<span class="chp" data-q="'+c[i]+'">'+c[i]+"</span>";
+    document.getElementById("hsCHIPS").innerHTML=html;
+    document.getElementById("hsCHIPS").addEventListener("click",function(e){if(e.target.className==="chp"){var q=e.target.getAttribute("data-q");document.getElementById("hsQ").value=q;hsRender(hsSearch(q),true);}});
+  })();
+  // ===== end HS =====
+
   document.getElementById("clrBtn").addEventListener("click",function(){
     var defTrk='<option value="2T">2T = 1500KG / 8CBM</option><option value="4T" selected>4T = 2500KG / 18CBM</option><option value="10T">10T = 10000KG / 30CBM</option>';
     document.getElementById("wh").selectedIndex=0;document.getElementById("rt").value="";document.getElementById("sQ").value="1";document.getElementById("sK").value="";document.getElementById("sL").value="";document.getElementById("sW").value="";document.getElementById("sH").value="";document.getElementById("sT").value="";document.getElementById("txt").value="";document.getElementById("tQ").value="1";document.getElementById("tT").value="";document.getElementById("tC").value="";document.getElementById("trk").innerHTML=defTrk;document.getElementById("trk").disabled=false;document.getElementById("rs").className="c rs";document.getElementById("det").className="det";document.getElementById("tbA").style.display="flex";sw("multi");st("pc");upd();
