@@ -541,9 +541,9 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     var gnTrOpt=document.getElementById("gnTr");
     var gnTrTxt=gnTrOpt.selectedIndex>=0?gnTrOpt.options[gnTrOpt.selectedIndex].text:"-";
     if(gnTrTxt.indexOf("不转运")>=0) gnTrTxt="-"; else gnTrTxt=gnTrTxt.split(" ")[0];
-    document.getElementById("gnTv").textContent=gnTrTxt;
-    document.getElementById("gnPv").textContent=gnPc.toFixed(2)+" CNY";
-    document.getElementById("gnSv").textContent=(gnWc+gnPc+gnTc).toFixed(2)+" CNY";
+    // gnTv removed
+    // gnPv removed
+    // gnSv removed
   }
   document.getElementById("gnW").addEventListener("change",gnPreview);
   document.getElementById("gnTr").addEventListener("change",gnPreview);
@@ -699,9 +699,9 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     var gnTrOpt2=document.getElementById("gnTr");
     var gnTrTxt2=gnTrOpt2.selectedIndex>=0?gnTrOpt2.options[gnTrOpt2.selectedIndex].text:"-";
     if(gnTrTxt2.indexOf("不转运")>=0) gnTrTxt2="-"; else gnTrTxt2=gnTrTxt2.split(" ")[0];
-    document.getElementById("gnTv").textContent=gnTrTxt2;
-    document.getElementById("gnPv").textContent=gnPc.toFixed(2)+" CNY";
-    document.getElementById("gnSv").textContent=gnTotCNY.toFixed(2)+" CNY";
+    // gnTv removed (calc)
+    // gnPv removed (calc)
+    // gnSv removed (calc)
     // 更新国内段结果区
     var gns=document.querySelectorAll("#gnR .gn");
     var gnTrOpt3=document.getElementById("gnTr");
