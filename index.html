@@ -138,7 +138,7 @@ tr:hover td{background:#f8f9ff}
 <div class="wrap">
 <div class="hh">
   <h1>固税运费计算器</h1>
-  <p>单件/批量 × 拼车/绿盒/包车 × 20GP/40HQ | 汇率默认 0.048</p>
+  <p>单件/批量 × 拼车/绿盒/包车 × 20GP/40HQ | 汇率默认 0.044</p>
 </div>
 <button class="hsbtn" id="hsOBtn"><span class="em">🔍</span> 品名 → 日本HS编码/税率查询</button>
 <div id="hsModal">
@@ -208,8 +208,8 @@ tr:hover td{background:#f8f9ff}
     <button class="mbtn on" id="bMlt">多件/批量</button>
     <button class="mbtn" id="bTot">总方数</button>
     <div class="g" style="max-width:120px;margin-left:auto">
-      <label style="font-size:.7rem;color:#666">汇率默认 0.048</label>
-      <input type="number" id="rt" value="0.048" step=".0001" style="padding:6px 8px;font-size:.85rem">
+      <label style="font-size:.7rem;color:#666">汇率默认 0.044</label>
+      <input type="number" id="rt" value="0.044" step=".0001" style="padding:6px 8px;font-size:.85rem">
     </div>
   </div>
   <div class="r">
@@ -586,7 +586,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
   });
   document.getElementById("calcBtn").addEventListener("click",function(){
     var w=document.getElementById("wh").value||document.getElementById("whManual").value.trim().toUpperCase();
-    var r=parseFloat(document.getElementById("rt").value)||0.048;
+    var r=parseFloat(document.getElementById("rt").value)||0.044;
     var z=Z[w]||0;
     if(!w){alert("请先选择仓库");return}
     var rows=[];
