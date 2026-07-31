@@ -723,14 +723,18 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     document.getElementById("gnT40").textContent=fm(t40Tot)+" (CNY "+Math.round(t40Tot*r).toLocaleString()+")";
     document.getElementById("gnDetail").className="dom sh";
     // ===== end 国内段 =====
+    var tot20 = ab20 + d20 + gnTotJPY;
+    var tot40 = ab40 + d40 + gnTotJPY;
+    document.getElementById("gnIn20").textContent=fm(gnTotJPY);
+    document.getElementById("gnIn40").textContent=fm(gnTotJPY);
     document.getElementById("ab20").textContent=fm(ab20);
     document.getElementById("d20").textContent=fm(d20);
-    document.getElementById("t20").textContent=fm(ab20+d20);
-    document.getElementById("up20").textContent=tCBM>0?Math.round((ab20+d20)*r/tCBM).toLocaleString()+" CNY/m³":"-";
+    document.getElementById("t20").textContent=fm(tot20);
+    document.getElementById("up20").textContent=tCBM>0?Math.round(tot20*r/tCBM).toLocaleString()+" CNY/m³":"-";
     document.getElementById("ab40").textContent=fm(ab40);
     document.getElementById("d40").textContent=fm(d40);
-    document.getElementById("t40").textContent=fm(ab40+d40);
-    document.getElementById("up40").textContent=tCBM>0?Math.round((ab40+d40)*r/tCBM).toLocaleString()+" CNY/m³":"-";
+    document.getElementById("t40").textContent=fm(tot40);
+    document.getElementById("up40").textContent=tCBM>0?Math.round(tot40*r/tCBM).toLocaleString()+" CNY/m³":"-";
     var displayTp = (tp==="pc" && needTruck && z===7) ? "truck" : tp;
     document.getElementById("tl").textContent={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[displayTp]+" "+w+"【"+z+"区】";
     document.getElementById("s2").textContent=tQty;
@@ -804,6 +808,8 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     document.getElementById("gnRSj").textContent="-";
     document.getElementById("gnT20").textContent="-";
     document.getElementById("gnT40").textContent="-";
+    document.getElementById("gnIn20").textContent="-";
+    document.getElementById("gnIn40").textContent="-";
   });
 })();
 </script>
