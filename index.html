@@ -545,7 +545,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     var gnTc=Math.round(trR*tKg*100)/100;
     var gnTrOpt=document.getElementById("gnTr");
     var gnTrTxt=gnTrOpt.selectedIndex>=0?gnTrOpt.options[gnTrOpt.selectedIndex].text:"-";
-    if(gnTrTxt.indexOf("不转运")>=0) gnTrTxt="-";
+    if(gnTrTxt.indexOf("不转运")>=0) gnTrTxt="-"; else gnTrTxt=gnTrTxt.split(" ")[0];
     document.getElementById("gnTv").textContent=gnTrTxt;
     document.getElementById("gnPv").textContent=gnPc.toFixed(2)+" CNY";
     document.getElementById("gnSv").textContent=(gnWc+gnPc+gnTc).toFixed(2)+" CNY";
@@ -703,7 +703,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     // 更新国内段预览
     var gnTrOpt2=document.getElementById("gnTr");
     var gnTrTxt2=gnTrOpt2.selectedIndex>=0?gnTrOpt2.options[gnTrOpt2.selectedIndex].text:"-";
-    if(gnTrTxt2.indexOf("不转运")>=0) gnTrTxt2="-";
+    if(gnTrTxt2.indexOf("不转运")>=0) gnTrTxt2="-"; else gnTrTxt2=gnTrTxt2.split(" ")[0];
     document.getElementById("gnTv").textContent=gnTrTxt2;
     document.getElementById("gnPv").textContent=gnPc.toFixed(2)+" CNY";
     document.getElementById("gnSv").textContent=gnTotCNY.toFixed(2)+" CNY";
@@ -711,7 +711,7 @@ var tn={pc:"拼车",green:"绿盒",mix:"混载",truck:"包车"}[tp];var truckWar
     var gns=document.querySelectorAll("#gnR .gn");
     var gnTrOpt3=document.getElementById("gnTr");
     var gnTrTxt3=gnTrOpt3.selectedIndex>=0?gnTrOpt3.options[gnTrOpt3.selectedIndex].text:"-";
-    if(gnTrTxt3.indexOf("不转运")>=0) gnTrTxt3="-";
+    if(gnTrTxt3.indexOf("不转运")>=0) gnTrTxt3="-"; else gnTrTxt3=gnTrTxt3.split(" ")[0];
     document.getElementById("gnRTv").textContent=gnTrTxt3;
     document.getElementById("gnRPv").textContent=gnPc.toFixed(2)+" CNY";
     document.getElementById("gnRPj").textContent=fm(gnPJPY);
